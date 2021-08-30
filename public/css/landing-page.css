@@ -66,6 +66,7 @@ body a{
 main{
     margin-left:300px;
     display:flex;
+    flex-direction: column;
     padding:2rem;
 }
 
@@ -74,7 +75,7 @@ main{
     width: 30%;
     max-width: 600px;
     min-width: 350px;
-    box-shadow: -1px 8px 10px  #00000050;
+    box-shadow: -1px 8px 10px  #00000050, 0px -1px 5px  #00000050;
     display:flex;
     align-items: center;
     margin:0  0 0 auto;
@@ -82,7 +83,7 @@ main{
 }
 
 .search-bar-div:hover{
-    box-shadow:2px 10px 20px  #00000050;
+    box-shadow:2px 10px 20px  #00000050, 0px -1px 5px  #00000050;;
 }
 
 .search-bar-div img{
@@ -104,3 +105,78 @@ main{
 }
 
 /* ----search bar end---- */
+
+/* ---restauarnt cards start ---- */
+.cards-container{
+    display: flex;
+    flex-wrap:wrap;
+    margin-top:3rem;
+    justify-content: center;
+}
+
+.res-card{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 25%;
+    min-width: 385px;
+    box-shadow: -1px 10px 12px  #00000050;
+    border-radius:2rem;
+    font-size:1.5rem;
+    padding:1rem;
+    border-top:7px solid #F63B35;
+    margin:2rem;
+    transition: transform .5s ease-in-out;
+    /* transition: box-shadow .5s ease-in-out; */
+    cursor:pointer;
+}
+
+.res-card:hover{
+    transform:translateY(-8px);
+    /* box-shadow: -5px 15px 20px  #00000050; */
+}
+
+.res-img{
+    margin-top:2rem;
+    width: 100%;
+}
+
+.rating-des-wrapper{
+    margin:2rem 0;
+    width: 100%;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.res-des{
+    margin:auto;
+}
+
+.res-des h3{
+    font-weight: unset;
+    margin-bottom: .3rem;
+}
+
+.res-des p{
+    color:#00000098;
+}
+
+.rating-div{
+    min-height: 60px;
+    min-width: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(../assets/rating-div-shape.svg) no-repeat;
+    color:white;
+    font-weight: bolder;
+    margin:1rem .5rem 0;
+}
+
+.rating-div i{
+   transform:scale(.7);
+   margin-left:.2rem;
+}
+/* ---restauarnt cards end ---- */
