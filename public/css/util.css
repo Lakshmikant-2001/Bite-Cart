@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap');
+
+/* --- scroll bar start --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(228, 92, 92);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #F63B35;
+}
+/* --- scroll bar end --- */
