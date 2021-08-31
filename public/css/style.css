@@ -42,13 +42,14 @@ main{
     padding:1rem;
     border-top:7px solid rgb(228, 92, 92);
     margin:2rem;
-    transition: all .5s ease-in-out;
+    /* transition: all .5s ease-in-out; */
+    transition:transform .5s ease-in-out;
     cursor:pointer;
 }
 
 .res-card:hover{
-    transform:translateY(-15px);
-    border-top:10px solid rgb(224, 53, 53); 
+    transform:translateY(-12px);
+    border-top:7px solid #F63B35;
 }
 
 .res-img{

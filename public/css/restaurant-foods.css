@@ -48,6 +48,7 @@ main{
     padding:2.5rem 2rem 2.5rem 6rem;
     position: relative;
 }
+
 .res-title-div img{
     position: absolute;
     top:30px;
@@ -106,7 +107,7 @@ main{
 
 .food-card{
     min-width: 390px;
-    box-shadow:-2px 0 14px  #00000050;
+    box-shadow:-2px 0 6px  #00000050,2px 0 6px  #00000050;
     font-size:1.5rem;
     color:#00000099;
     margin:2rem;
@@ -117,8 +118,8 @@ main{
     border-bottom:6px solid #f17171;
     position: relative;
     padding:2.5rem 0 1.5rem;
-    transition: transform .75s ease-in-out;
-    cursor:pointer;
+    /* transition: transform .75s ease-in-out; */
+    transition: all .75s ease-in-out;
 }
 
 .food-card::after,.food-card::before{
@@ -128,6 +129,7 @@ main{
     border-radius:50%;
     background-color: #ffffff;
     position:absolute;   
+    transition: all .75s ease-in-out;
 }
 
 .food-card::after{
@@ -148,10 +150,17 @@ main{
 
 .food-card:hover{
     transform:scale(1.015);
-    border-top:7px solid #E45757;
-    border-bottom:7px solid #E45757;
-    /* box-shadow:5px 0 8px  #00000040,-5px 0 8px  #00000040; */
+    border-top:6px solid #F63B35;
+    border-bottom:6px solid #F63B35;
 }
+.food-card:hover::after{
+    border-bottom: 9px solid #F63B35;
+}
+.food-card:hover::before{
+    border-top: 9px solid #F63B35;
+}
+
+
 .food-image{
     width: 100%;
     padding:0 1rem 0.5rem;
@@ -180,6 +189,7 @@ main{
     min-height: 56px;
     color:#E45757;
     font-weight: bold;
+    cursor:pointer;
 }
 
 /* ---Foods Card end---- */
