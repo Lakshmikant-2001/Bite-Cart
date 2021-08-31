@@ -40,15 +40,15 @@ main{
     border-radius:2rem;
     font-size:1.5rem;
     padding:1rem;
-    border-top:7px solid rgb(228, 92, 92);
+    border-top:7px solid #e45c5c;
     margin:2rem;
     transition: all .5s ease-in-out;
     cursor:pointer;
 }
 
 .res-card:hover{
-    transform:translateY(-8px);
-    border-top:10px solid rgb(228, 92, 92); 
+    transform:translateY(-15px);
+    border-top:10px solid rgb(224, 53, 53); 
 }
 
 .res-img{
