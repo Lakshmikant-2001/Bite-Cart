@@ -40,7 +40,7 @@ main{
     border-radius:2rem;
     font-size:1.5rem;
     padding:1rem;
-    border-top:7px solid #e45c5c;
+    border-top:7px solid rgb(228, 92, 92);
     margin:2rem;
     transition: all .5s ease-in-out;
     cursor:pointer;
@@ -84,7 +84,7 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url(../assets/rating-div-shape.svg) no-repeat;
+    background: url(../assets/rating-div-shape.png) no-repeat;
     color:white;
     font-weight: bolder;
     margin:1rem .5rem 0;

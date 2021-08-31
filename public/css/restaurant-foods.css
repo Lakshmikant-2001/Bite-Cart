@@ -77,7 +77,7 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url(../assets/rating-div-shape.svg) no-repeat;
+    background: url(../assets/rating-div-shape.png) no-repeat;
     color:white;
     font-weight: bolder;
     margin:1rem .5rem 0;
