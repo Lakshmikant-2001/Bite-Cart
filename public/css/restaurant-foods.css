@@ -8,9 +8,79 @@
 
 body{
     font-family: 'Questrial', sans-serif;
+    color:black;
 }
 
 body a{
     text-decoration: none;
     color:inherit;
+}
+
+body h2,h4{
+    font-weight: unset;
+}
+
+main{
+    margin-left:320px;
+}
+
+.resturant-header-wrapper{
+    padding:3rem 7rem;
+    display:flex;
+    flex-wrap:wrap;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+
+.restuarnt-titlebar-container{
+    max-width: 850px;
+    min-width: 360px;
+    flex-grow: 1;
+    margin:0 3rem 0 1rem;
+    border-radius:1.5rem;
+    box-shadow:-2px 6px 14px  #00000050,0 -1px 10px  #00000050;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:2.5rem 2rem 2.5rem 6rem;
+    position: relative;
+}
+.res-title-div img{
+    position: absolute;
+    top:30px;
+    left:30px;
+    width:35px;
+}
+
+.res-title-div h2{
+    font-size:2.3rem;
+    margin-bottom: .7rem;
+}
+
+.res-title-div h4{
+    font-size:1.8rem;
+    margin-bottom: 1rem;
+}
+
+.res-title-divd p{
+    font-size:1.2rem;
+    color:#00000098;
+}
+
+.rating-div{
+    min-height: 60px;
+    min-width: 95px;
+    align-self:flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(../assets/rating-div-shape.svg) no-repeat;
+    color:white;
+    font-weight: bolder;
+    margin:1rem .5rem 0;
+}
+
+.rating-div i{
+   transform:scale(.7);
+   margin-left:.2rem;
 }
