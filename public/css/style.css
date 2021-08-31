@@ -6,26 +6,13 @@
     box-sizing: border-box;
 }
 
-body a{
-    text-decoration: none;
-    color:inherit;
+body{
     font-family: 'Questrial', sans-serif;
 }
 
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #111111;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgb(228, 92, 92);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #F63B35;
+body a{
+    text-decoration: none;
+    color:inherit;
 }
 
 /* ---nav start--- */
@@ -36,7 +23,7 @@ body a{
     flex-direction: column;
     background-color: #090303;
     color:#f3dede;
-    font-size:1.8rem;
+    font-size:1.6rem;
     padding:1rem 0rem 1rem 2.5rem;
     position: fixed;
 }
