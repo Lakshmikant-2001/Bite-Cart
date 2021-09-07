@@ -12,20 +12,25 @@
 </head>
 
 <body>
-        <header class="side-navbar">
-            <div class="side-nav-title-div">
-                <h2>BITE-CART</h2>
-                <ul></ul>
+    <header class="side-navbar">
+        <div class="side-nav-title-div">
+            <h2>BITE-CART</h2>
+            <div class="close-btn">
+                <i class="fas fa-times"></i>
             </div>
-            <ul>
-                <li class="side-nav-link"><a href="./index.html">Restaurants</a></li>
-                <li class="side-nav-link"><a href="./restaurant-foods.html">Foods</a></li>
-                <li class="side-nav-link"><a href="">Cart</a></li>
-                <li class="side-nav-link"><a href="">My Orders</a></li>
-                <li class="side-nav-link"><a href="">Offers</a></li>
-                <li class="side-nav-link"><a href="">Sign in</a></li>
-            </ul>
-        </header>
+        </div>
+        <ul>
+            <li class="side-nav-link"><a href="./index.html">Restaurants</a></li>
+            <li class="side-nav-link"><a href="./restaurant-foods.html">Foods</a></li>
+            <li class="side-nav-link"><a href="">Cart</a></li>
+            <li class="side-nav-link"><a href="">My Orders</a></li>
+            <li class="side-nav-link"><a href="">Offers</a></li>
+            <li class="side-nav-link"><a href="">Sign in</a></li>
+        </ul>
+    </header>
+    <div class="ham-div">
+        <span></span><span></span><span></span>
+    </div>
         <main>
             <div class="search-bar-div">
             <img src="./assets/search.png" alt="">
@@ -113,6 +118,7 @@
             </div>
             </div>
         </main>
+        <script src="./js/main.js"></script>
          <!-- firebase scripts -->
     <script  src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script  src="//firebase/8.0.1/firebase-database.js"></script>
