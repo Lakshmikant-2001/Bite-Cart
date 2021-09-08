@@ -22,6 +22,7 @@ body h2,h4{
 
 main{
     margin-left:320px;
+    /* transition: transform .5s ease-in-out; */
 }
 
 /* ---restuarant header start--- */

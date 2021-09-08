@@ -20,6 +20,7 @@ main{
     display:flex;
     flex-direction: column;
     padding:2rem;
+    /* transition: transform .5s ease-in-out; */
 }
 
 /* ---restauarnt cards start ---- */
