@@ -1,0 +1,144 @@
+.side-navbar {
+    width: 350px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #090303;
+    color: #f3dede;
+    font-size: 1.6rem;
+    padding: 1rem 0rem 1rem 2.5rem;
+    position: fixed;
+    transition: transform .40s ease-in-out;
+}
+
+.side-nav-title-div {
+    padding:5rem 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    position: relative;
+}
+
+.ham-expand-div {
+    cursor: pointer;
+    position: absolute;
+    position: fixed;
+    top:50px;
+    left:50px;
+    transform: scale(0);
+}
+
+.ham-expand-div span {
+    display: block;
+    width: 35px;
+    height: 3.5px;
+    background-color: #F63B35;
+    margin: .5rem;
+}
+
+.ham-contract-div {
+    position:absolute;
+    top:20px;
+    right: 40px;
+    cursor: pointer;
+}
+
+.ham-contract-div i{
+    transform:scale(1.3);
+    color:#f3dede;
+}
+
+.side-nav-title-div h2 {
+    /* font-family: 'Cinzel Decorative', cursive; */
+    font-family: 'Bungee Inline', cursive;
+    font-weight: unset;
+    color: #F63B35;
+    font-size: 2.5rem;
+    margin-left: .5rem;
+}
+
+.side-navbar ul {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.side-nav-link {
+    list-style: none;
+    margin: .5rem 0;
+    padding: .8rem 0 .8rem 1rem;
+    transition: border 1s ease;
+    transition: color 1s ease;
+}
+
+.side-nav-link:last-child {
+    margin-top: 5rem;
+}
+
+.side-nav-link:hover {
+    color: #fff;
+    border-left: 5px solid #F63B35;
+}
+
+/* ---nav end--- */
+
+/* --search bar start--- */
+
+.search-bar-div {
+    width: 30%;
+    max-width: 600px;
+    min-width: 350px;
+    box-shadow: -1px 8px 10px #00000050, 0px -1px 5px #00000050;
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 auto;
+    padding: 0.5rem .8rem;
+}
+
+.search-bar-div:hover {
+    box-shadow: 2px 10px 20px #00000050, 0px -1px 5px #00000050;
+}
+
+.search-bar-div img {
+    width: 28px;
+    height: 30px;
+}
+
+.search-bar {
+    border: none;
+    font-size: 1.45rem;
+    color: #00000080;
+    flex-grow: 1;
+    height: 100%;
+    padding-left: .5rem;
+}
+
+.search-bar:focus {
+    outline: none;
+}
+
+/* ----search bar end---- */
+
+/* --- scroll bar start --- */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(228, 92, 92);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #F63B35;
+}
+
+/* --- scroll bar end --- */
+
+.main{
+    transition: transform .35s ease-in-out;
+}
