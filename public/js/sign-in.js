@@ -11,18 +11,18 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// document.getElementById('login').addEventListener('click', GoogleLogin)
+document.getElementById('google-sign-in').addEventListener('click', GoogleLogin)
 
-// let provider = new firebase.auth.GoogleAuthProvider()
+let provider = new firebase.auth.GoogleAuthProvider()
 
-// function GoogleLogin() {
-//   console.log('Login Btn Call')
-//   firebase.auth().signInWithPopup(provider).then(res => {
-//     console.log(res.user) 
-//   }).catch(e => {
-//     console.log(e)
-//   })
-// }
+function GoogleLogin() {
+  firebase.auth().signInWithPopup(provider).then(res => {
+    console.log(res.user) 
+    window.location.href="./index.html";
+  }).catch(e => {
+    console.log(e)
+  })
+}
 
 window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
 
