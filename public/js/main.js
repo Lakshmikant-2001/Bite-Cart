@@ -1,26 +1,14 @@
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCM3FAnHapR-Xb4rHppVQ-JbUD9pK0KwEo",
-  authDomain: "bite-cart.firebaseapp.com",
-  databaseURL: "https://bite-cart-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "bite-cart",
-  storageBucket: "bite-cart.appspot.com",
-  messagingSenderId: "28386127835",
-  appId: "1:28386127835:web:1fb2a606b584b0e9d381fe"
-};
-
+import {firebaseConfig} from "./firebase-modules.js"
 firebase.initializeApp(firebaseConfig);
-const googleSignIn = document.getElementById('google-sign-in')
-let provider = new firebase.auth.GoogleAuthProvider()
 
-function checkStatus() {
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      writeInDb(user)
-    } else {
-    }
-  });
-}
+let provider = new firebase.auth.GoogleAuthProvider();
+const googleSignIn = document.getElementById('google-sign-in')
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    writeInDb(user)
+  }
+});
 
 function googleLogin() {
   firebase.auth().signInWithPopup(provider).then(res => {
