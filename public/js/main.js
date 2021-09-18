@@ -1,8 +1,8 @@
-import {firebaseConfig} from "./firebase-modules.js"
+import { firebaseConfig } from "./firebase-modules.js"
 firebase.initializeApp(firebaseConfig);
 
 let provider = new firebase.auth.GoogleAuthProvider();
-const googleSignIn = document.getElementById('google-sign-in')
+const googleSignIn = document.getElementById('google-sign-in');
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
@@ -11,10 +11,15 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 function googleLogin() {
+  const body = document.querySelector('body');
+  body.style.filter = "blur(30px)";
+  googleSignIn.removeEventListener('click',googleLogin);
   firebase.auth().signInWithPopup(provider).then(res => {
-    console.log(res.user)
+    console.log(res.user);
   }).catch(e => {
-    console.log(e)
+    body.style.filter = "none";
+    googleSignIn.addEventListener('click', googleLogin);
+
   })
 }
 
@@ -37,7 +42,5 @@ googleSignIn.addEventListener('click', googleLogin);
 window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
 
 recaptchaVerifier.render().then(widgetId => {
-  console.log(widgetId);
   window.recaptchaWidgetId = widgetId;
-  console.log(window.recaptchaVerifier);
 })
