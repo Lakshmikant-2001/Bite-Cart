@@ -5,121 +5,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/87e71d54fb.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/util.css">
     <title>Bite Cart</title>
 </head>
 
 <body>
-    <header class="side-navbar">
-        <div class="side-nav-title-div">
-            <h2>BITE-CART</h2>
-            <div class="ham-contract-div">
-                <i class="fas fa-times"></i>
-            </div>
-        </div>
-        <ul>
-            <li class="side-nav-link"><a href="./index.html">Restaurants</a></li>
-            <li class="side-nav-link"><a href="./restaurant-foods.html">Foods</a></li>
-            <li class="side-nav-link"><a href="">Cart</a></li>
-            <li class="side-nav-link"><a href="">My Orders</a></li>
-            <li class="side-nav-link"><a href="">Offers</a></li>
-            <li class="side-nav-link"><a href="">Sign in</a></li>
-        </ul>
-    </header>
-    <div class="ham-expand-div">
-        <span></span><span></span><span></span>
-    </div>
-    <main class="main">
-        <div class="search-bar-div">
-            <img src="./assets/search.png" alt="">
-            <input type="text" class="search-bar" placeholder="Search Restuarants">
-        </div>
-        <div class="cards-container">
-            <div class="res-card">
-                <img class="res-img" src="./assets/restaurant-1.png" alt="">
-                <div class="rating-des-wrapper">
-                    <div class="res-des">
-                        <h3>Paapu Restaurant</h3>
-                        <p>Saravanmpatti</p>
+    <main>
+        <section class="des-wrapper">
+            <h2>biteCart</h2>
+            <img src="./assets/delievery-man.png" alt="">
+        </section>
+        <section class="form-wrapper">
+            <div class="phone-signin">
+                <div class="phone-signin-header">
+                    <img src="./assets/phone-logo.png" alt="">
+                    <h3>sign in with phone</h3>
+                </div>
+                <div class="mobile-no-wrapper">
+                    <div class="phone-no-prompt">
+                        <p>Enter your phone number</p>
                     </div>
-                    <div class="rating-div">
-                        <p class="res-rating">4.1</p>
-                        <i class="fas fa-star"></i>
+                    <div class="input-div">
+                      <div class="country-code-div">
+                            <img src="./assets/flag-india.png" alt="" class="flag-img">
+                            <p>+91</p>
+                            <img src="./assets/drop-down.png" alt="">
+                      </div>
+                        <input type="tel" id="phone-no" pattern="[0-9]" placeholder="95959 59595">
                     </div>
                 </div>
-            </div>
-            <div class="res-card">
-                <img class="res-img" src="./assets/restaurant-1.png" alt="">
-                <div class="rating-des-wrapper">
-                    <div class="res-des">
-                        <h3>Paapu Restaurant</h3>
-                        <p>Saravanmpatti</p>
-                    </div>
-                    <div class="rating-div">
-                        <p class="res-rating">4.1</p>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="res-card">
-                <img class="res-img" src="./assets/restaurant-1.png" alt="">
-                <div class="rating-des-wrapper">
-                    <div class="res-des">
-                        <h3>Paapu Restaurant</h3>
-                        <p>Saravanmpatti</p>
-                    </div>
-                    <div class="rating-div">
-                        <p class="res-rating">4.1</p>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="res-card">
-                <img class="res-img" src="./assets/restaurant-1.png" alt="">
-                <div class="rating-des-wrapper">
-                    <div class="res-des">
-                        <h3>Paapu Restaurant</h3>
-                        <p>Saravanmpatti</p>
-                    </div>
-                    <div class="rating-div">
-                        <p class="res-rating">4.1</p>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="res-card">
-                <img class="res-img" src="./assets/restaurant-1.png" alt="">
-                <div class="rating-des-wrapper">
-                    <div class="res-des">
-                        <h3>Paapu Restaurant</h3>
-                        <p>Saravanmpatti</p>
-                    </div>
-                    <div class="rating-div">
-                        <p class="res-rating">4.1</p>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="res-card">
-                <img class="res-img" src="./assets/restaurant-1.png" alt="">
-                <div class="rating-des-wrapper">
-                    <div class="res-des">
-                        <h3>Paapu Restaurant</h3>
-                        <p>Saravanmpatti</p>
-                    </div>
-                    <div class="rating-div">
-                        <p class="res-rating">4.1</p>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
+                <div id="recaptcha-container"></div>
+                <button type="submit" class="btn" id="get-code-btn">Get code</button>
+                <p>or</p>
+              </div>
+              <div class="google-sign-in-div btn" id="google-sign-in">
+                <img src="assets/google-title-logo.png" alt="">
+                <button  id="google-sign-in-btn">sign in with google</button>
+              </div>
+        </section>
     </main>
-    <script src="./js/common.js"></script>
+
+    <script type="module" src="./js/main.js"></script>
     <!-- firebase scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>

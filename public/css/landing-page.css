@@ -1,0 +1,98 @@
+*,
+*::after,
+*::before{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Questrial', sans-serif;
+}
+
+body a{
+    text-decoration: none;
+    color:inherit;
+}
+
+main{
+    margin-left:300px;
+    display:flex;
+    flex-direction: column;
+    padding:2rem;
+}
+
+/* ---restauarnt cards start ---- */
+.cards-container{
+    display: flex;
+    flex-wrap:wrap;
+    margin-top:3rem;
+    justify-content: center;
+}
+
+.res-card{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 25%;
+    min-width: 385px;
+    box-shadow: -1px 10px 12px  #00000050;
+    border-radius:2rem;
+    font-size:1.5rem;
+    padding:1rem;
+    border-top:7px solid rgb(228, 92, 92);
+    margin:2rem;
+    /* transition: all .5s ease-in-out; */
+    transition:transform .5s ease-in-out;
+    cursor:pointer;
+}
+
+.res-card:hover{
+    transform:translateY(-12px);
+    border-top:7px solid #F63B35;
+}
+
+.res-img{
+    margin-top:2rem;
+    width: 100%;
+}
+
+.rating-des-wrapper{
+    margin:2rem 0;
+    width: 100%;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.res-des{
+    margin:auto;
+}
+
+.res-des h3{
+    font-weight: unset;
+    margin-bottom: .3rem;
+}
+
+.res-des p{
+    color:#00000098;
+}
+
+.rating-div{
+    min-height: 60px;
+    min-width: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(../assets/rating-div-shape.png) no-repeat;
+    color:white;
+    font-weight: bolder;
+    margin:1rem .5rem 0;
+}
+
+.rating-div i{
+   transform:scale(.7);
+   margin-left:.2rem;
+}
+/* ---restauarnt cards end ---- */
