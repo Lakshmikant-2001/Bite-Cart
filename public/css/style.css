@@ -11,7 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   font-family: 'Passion One', cursive;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 main {
@@ -217,5 +217,9 @@ main {
 
 #code-input:focus{
   outline: unset;
+  border-bottom: 2px solid #fa595390;
 }
 
+#code-input::placeholder{
+  color:#6d6a6a80;
+}

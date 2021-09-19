@@ -12,27 +12,27 @@ recaptchaVerifier.render().then(widgetId => {
   window.recaptchaWidgetId = widgetId;
 })
 
-function displayEnterCodeDiv(){
+function displayEnterCodeDiv() {
   const formDiv = document.querySelector('.form-cnt');
   const verifyCodeDiv = document.querySelector('#verify-code-div');
   const phoneNumber = `+91${document.querySelector('#phone-no').value}`;
   const captchaVerifier = window.recaptchaVerifier;
-  verifyCodeDiv.style.visibility="unset";
-  formDiv.style.display="none";
-  getCode(phoneNumber,captchaVerifier)
+  verifyCodeDiv.style.visibility = "unset";
+  formDiv.style.display = "none";
+  getCode(phoneNumber, captchaVerifier)
 }
 
-function getCode(phoneNumber,captchaVerifier) {
+function getCode(phoneNumber, captchaVerifier) {
   const signInWithPhoneBtn = document.getElementById('sign-in-with-phone-btn');
   auth.signInWithPhoneNumber(phoneNumber, captchaVerifier)
-  .then(confirmationResult => {
-    const sentCodeId = confirmationResult.verificationId;
-    signInWithPhoneBtn.addEventListener('click', ()=> signInWithPhone(sentCodeId));
-  })
+    .then(confirmationResult => {
+      const sentCodeId = confirmationResult.verificationId;
+      signInWithPhoneBtn.addEventListener('click', () => signInWithPhone(sentCodeId));
+    })
 }
 
-function signInWithPhone(sentCodeId){
-  const codeInput =  document.getElementById('code-input').value;
+function signInWithPhone(sentCodeId) {
+  const codeInput = document.getElementById('code-input').value;
   console.log(codeInput);
   const credential = firebase.auth.PhoneAuthProvider.credential(sentCodeId, codeInput);
   auth.signInWithCredential(credential)
@@ -70,8 +70,8 @@ function writeInDb(user) {
     username: name,
     profile_picture: imageUrl
   }, (error) => {
-    if (error) {
-    } else {
+    if (error) { }
+    else {
       window.location = "./landing-page.html"
     }
   });
