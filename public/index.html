@@ -18,32 +18,39 @@
             <img src="./assets/delievery-man.png" alt="">
         </section>
         <section class="form-wrapper">
-            <div class="phone-signin">
-                <div class="phone-signin-header">
-                    <img src="./assets/phone-logo.png" alt="">
-                    <h3>sign in with phone</h3>
-                </div>
-                <div class="mobile-no-wrapper">
-                    <div class="phone-no-prompt">
-                        <p>Enter your phone number</p>
+            <div class="form-cnt">
+                <div class="phone-signin">
+                    <div class="phone-signin-header">
+                        <img src="./assets/phone-logo.png" alt="">
+                        <h3>sign in with phone</h3>
                     </div>
-                    <div class="input-div">
-                      <div class="country-code-div">
-                            <img src="./assets/flag-india.png" alt="" class="flag-img">
-                            <p>+91</p>
-                            <img src="./assets/drop-down.png" alt="">
-                      </div>
-                        <input type="tel" id="phone-no" pattern="[0-9]" placeholder="95959 59595">
+                    <div class="mobile-no-wrapper">
+                        <div class="phone-no-prompt">
+                            <p>Enter your phone number</p>
+                        </div>
+                        <div class="input-div">
+                            <div class="country-code-div">
+                                <img src="./assets/flag-india.png" alt="" class="flag-img">
+                                <p>+91</p>
+                                <img src="./assets/drop-down.png" alt="">
+                            </div>
+                            <input type="tel" id="phone-no" pattern="[0-9]" placeholder="95959 59595">
+                        </div>
                     </div>
+                    <div id="recaptcha-container"></div>
+                    <button class="btn" id="get-code-btn">Get code</button>
+                    <p>or</p>
                 </div>
-                <div id="recaptcha-container"></div>
-                <button type="submit" class="btn" id="get-code-btn">Get code</button>
-                <p>or</p>
-              </div>
-              <div class="google-sign-in-div btn" id="google-sign-in">
-                <img src="assets/google-title-logo.png" alt="">
-                <button  id="google-sign-in-btn">sign in with google</button>
-              </div>
+                <div class="google-sign-in-div btn" id="google-sign-in">
+                    <img src="assets/google-title-logo.png" alt="">
+                    <button id="google-sign-in-btn">sign in with google</button>
+                </div>
+            </div>
+            <div id="verify-code-div">
+                <label for="code-input">Enter Verification code:</label>
+                <input type="text" id="code-input" placeholder="6-digit code">
+                <button id="sign-in-with-phone-btn" class="btn">verify</button>
+            </div>
         </section>
     </main>
 

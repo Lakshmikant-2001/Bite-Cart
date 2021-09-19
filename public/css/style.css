@@ -11,6 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   font-family: 'Passion One', cursive;
+  /* overflow: hidden; */
 }
 
 main {
@@ -31,7 +32,6 @@ main {
   align-items: center;
   justify-content: space-evenly;
   user-select: none;
-  /* border-right: solid 20px #fa5953; */
 }
 
 .des-wrapper h2 {
@@ -53,11 +53,17 @@ main {
   flex-grow: 1;
   background-color: #fff;
   border-radius: 0 1rem 1rem 0;
+  color: #6d6a6a;
+  display: flex;
+    flex-direction: column;
+  align-items: center;
+}
+
+.form-cnt {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  color: #6d6a6a;
 }
 
 .phone-signin {
@@ -106,7 +112,7 @@ main {
   padding: .6rem 0.3rem;
   display: flex;
   align-items: center;
-   z-index: 1;
+  z-index: 1;
 }
 
 .country-code-div img {
@@ -157,34 +163,59 @@ main {
   border-radius: .3rem;
   color: inherit;
   cursor: pointer;
-  transition: box-shadow .3s ease-in-out , transform .3s ease-in-out;
+  transition: box-shadow .3s ease-in-out, transform .3s ease-in-out;
 }
 
 .btn:hover {
-  transform:scale(1.05);
-  box-shadow: 3px 3px 3px #fa595390,-3px 3px 3px #fa595390,1px -1px 1px #fa595390,-1px -1px 1px #fa595390;
+  transform: scale(1.05);
+  box-shadow: 3px 3px 3px #fa595390, -3px 3px 3px #fa595390, 1px -1px 1px #fa595390, -1px -1px 1px #fa595390;
 }
 
-.phone-signin>p{
-  font-size:2rem;
-  margin:3rem 0;
+.phone-signin>p {
+  font-size: 2rem;
+  margin: 3rem 0;
 }
 
-.google-sign-in-div{
+.google-sign-in-div {
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin-bottom: 5rem;
-  padding:.8rem 1.8rem;
+  padding: .8rem 1.8rem;
 }
 
-#google-sign-in-btn{
+#google-sign-in-btn {
   box-shadow: unset;
   background-color: transparent;
-  border:unset;
+  border: unset;
   font-family: inherit;
   font-size: 1.5rem;
   color: #7a7878;
-  margin-left:.8rem;
+  margin-left: .8rem;
   cursor: inherit;
 }
+
+#verify-code-div {
+  /* align-self: flex-start; */
+  display: flex;
+  flex-direction: column;
+  visibility:hidden;
+  margin: 5rem 3rem;
+  font-size:1.5rem;
+}
+
+#verify-code-div label{
+  margin-bottom: 2rem;
+}
+
+#code-input{
+  font-size:1.5rem;
+  border:unset;
+  border-bottom: 2px solid #6d6a6a90;
+  margin-bottom: 2rem;
+}
+
+#code-input:focus{
+  outline: unset;
+}
+
