@@ -118,7 +118,7 @@ main{
     border-top:6px solid #f17171;
     border-bottom:6px solid #00000050;
     position: relative;
-    padding:2.5rem 0 1.5rem;
+    padding-bottom: .5rem;
     /* transition: transform .75s ease-in-out; */
     transition: all .75s ease-in-out;
 }
@@ -151,18 +151,28 @@ main{
     transform:scale(1.015);
     border-top:6px solid #F63B35;
     border-bottom:6px solid #00000060;
+    box-shadow: 10px 0 20px #00000050;
 }
+
 .food-card:hover::after{
     border-bottom: 9px solid #F63B35;
 }
+
 .food-card:hover::before{
     border-top: 9px solid #00000060;
 }
 
+.food-type-logo{
+    position: absolute;
+    width: 35px;
+    top:10px;
+    right: 10px;
+}
 
 .food-image{
     width: 100%;
-    padding:0 1rem 0.5rem;
+    border-bottom:4px solid #E45757;
+    backdrop-filter: 10px;
 }
 
 .card-footer{
