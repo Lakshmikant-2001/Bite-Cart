@@ -49,10 +49,9 @@ auth.onAuthStateChanged((user) => {
   if (user && flag==0) {
     flag=1
     userFormGenerate(user);
-    
   }
   else{
-      window.location = "./landing-page.html"
+      // window.location = "./landing-page.html"
   }
 });
 
@@ -75,14 +74,20 @@ function userFormGenerate(user) {
   const formWrapper = document.querySelector('.form-wrapper')
   formDiv.remove();
   formWrapper.innerHTML = `
+  <div class="user-form-div">
+  <div id="user-acc-type-div">
+    <h2 id="acc-type-buyer">Buyer</h2>
+    <h2 id="acc-type-seller">Seller</h2>
+  </div>
     <input type='text' placeholder='Enter your name' id='u-name'/>
     <input type='text' placeholder='Door no' id='u-door-no' /> 
     <input type='text' placeholder='Street name' id='u-street-name' />
     <input type='text' placeholder='Area' id='u-area' /> 
     <input type='text' placeholder='Pincode' id='u-pincode' /> 
-    <button id='user-det-btn'>Submit</button>`;
+    <button id='user-det-btn' class="btn">Submit</button>
+  </div>`;
   const userDetBtn = document.querySelector('#user-det-btn');
-  userDetBtn.addEventListener('click', ()=>{
+  userDetBtn.addEventListener('click', () => {
     writeInDb(user)
   })
 }
@@ -111,3 +116,4 @@ function writeInDb(user) {
 
 getCodeBtn.addEventListener('click', displayEnterCodeDiv);
 googleSignIn.addEventListener('click', googleLogin);
+

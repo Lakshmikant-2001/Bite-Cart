@@ -55,7 +55,7 @@ main {
   border-radius: 0 1rem 1rem 0;
   color: #6d6a6a;
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -199,27 +199,90 @@ main {
   /* align-self: flex-start; */
   display: flex;
   flex-direction: column;
-  visibility:hidden;
+  visibility: hidden;
   margin: 5rem 3rem;
-  font-size:1.5rem;
+  font-size: 1.5rem;
 }
 
-#verify-code-div label{
+#verify-code-div label {
   margin-bottom: 2rem;
 }
 
-#code-input{
-  font-size:1.5rem;
-  border:unset;
+#code-input {
+  font-size: 1.5rem;
+  border: unset;
   border-bottom: 2px solid #6d6a6a90;
   margin-bottom: 2rem;
 }
 
-#code-input:focus{
+#code-input:focus {
   outline: unset;
   border-bottom: 2px solid #fa595390;
 }
 
-#code-input::placeholder{
-  color:#6d6a6a80;
+#code-input::placeholder {
+  color: #6d6a6a80;
+}
+
+.user-form-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 3rem 0;
+}
+
+.user-form-div label{
+  font-size: 1.5rem;
+}
+
+.user-form-div input{
+  width: 75%;
+  height: 45px;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  padding-left:.1rem;
+}
+
+.user-form-div input:focus{
+  outline:none;
+}
+
+.user-form-div input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+
+#user-acc-type-div{
+  width: 75%;
+  display: flex;
+  border-radius:.5rem .5rem 0 0;
+  margin:1rem 3rem 3rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 10px #00000050,-1px -2px 100px #00000050;
+}
+
+#user-acc-type-div h2{
+  font-size:2rem;
+  font-weight: unset;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding:.5rem 2rem;
+}
+
+#acc-type-buyer{
+  border-radius: .4rem 0 0 0;
+  background-color:#fa5953;
+  color:#fff;
+}
+
+#acc-type-seller{
+  border-radius: 0 .4rem  0 0;
+}
+
+#user-det-btn{
+  width: 50%;
+  margin-top:2rem;
 }
