@@ -45,8 +45,14 @@ function signInWithPhone(sentCodeId) {
 }
 
 auth.onAuthStateChanged((user) => {
-  if (user) {
+  let flag=0
+  if (user && flag==0) {
+    flag=1
     userFormGenerate(user);
+    
+  }
+  else{
+      window.location = "./landing-page.html"
   }
 });
 
@@ -69,11 +75,11 @@ function userFormGenerate(user) {
   const formWrapper = document.querySelector('.form-wrapper')
   formDiv.remove();
   formWrapper.innerHTML = `
-    <input type='text' placeholder='Enter your name' id='u_name' />
-    <input type='text' placeholder='Door no' id='u_door_no' /> 
-    <input type='text' placeholder='Street name' id='u_street_name' />
-    <input type='text' placeholder='Area' id='u_area' /> 
-    <input type='text' placeholder='Pincode' id='u_pincode' /> 
+    <input type='text' placeholder='Enter your name' id='u-name'/>
+    <input type='text' placeholder='Door no' id='u-door-no' /> 
+    <input type='text' placeholder='Street name' id='u-street-name' />
+    <input type='text' placeholder='Area' id='u-area' /> 
+    <input type='text' placeholder='Pincode' id='u-pincode' /> 
     <button id='user-det-btn'>Submit</button>`;
   const userDetBtn = document.querySelector('#user-det-btn');
   userDetBtn.addEventListener('click', ()=>{
@@ -82,17 +88,20 @@ function userFormGenerate(user) {
 }
 
 function writeInDb(user) {
-  const name = user.displayName
   const imageUrl = user.photoURL
-  const userName = document.querySelector('#u_name')
-  const userDoorNo = document.querySelector('#u-door-no')
-  const userStreetName = document.querySelector('#u-street-name')
-  const userArea = document.querySelector('#u-area')
-  const userPincode = document.querySelector('#u-pincode')
-  firebase.database().ref('users/' + user.uid).set({
-    username: name,
-    profile_picture: imageUrl
-  }, (error) => {
+  const userName = document.querySelector('#u-name').value
+  const userDoorNo = document.querySelector('#u-door-no').value
+  const userStreetName = document.querySelector('#u-street-name').value
+  const userArea = document.querySelector('#u-area').value
+  const userPincode = document.querySelector('#u-pincode').value
+  firebase.database().ref('users/' + user.uid +'/user-details/').set({
+    username: userName,
+    profile_picture: imageUrl,
+    doorNo:userDoorNo,
+    streetName:userStreetName,
+    area:userArea,
+    pincode:userPincode
+   }, (error) => {
     if (error) { }
     else {
       window.location = "./landing-page.html"
