@@ -6,8 +6,10 @@ const userPhoto = document.querySelector('#user-photo')
 auth.onAuthStateChanged((user) => {
     if (user) {
         const userId = user.uid
+        const uploadPhotoStorage = storage.ref('user/profilePicture/' + userId)
+        getUploadedUrl(uploadPhotoStorage)
         uploadImageBtn.addEventListener('click', () => {
-            uploadImage(userId);
+            uploadImage(uploadPhotoStorage);
         });
     }
     else {
@@ -15,9 +17,8 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
-function uploadImage(userId) {
+function uploadImage(uploadPhotoStorage) {
     let uploadPhoto = document.querySelector("#user-photo-up").files[0];
-    const uploadPhotoStorage = storage.ref('user/profilePicture/' + userId)
     uploadPhotoStorage.put(uploadPhoto).then(res => {
         getUploadedUrl(uploadPhotoStorage)
     }).catch(e => {
