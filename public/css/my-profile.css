@@ -19,5 +19,16 @@ main{
     margin-left:350px;
     display:flex;
     flex-direction: column;
+    align-items: center;
     padding:2rem;
+}
+
+#user-photo{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+main *{
+    margin:1rem 0;
 }

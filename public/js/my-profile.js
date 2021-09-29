@@ -1,16 +1,39 @@
-import { firebaseConfig } from "./firebase-modules.js"
-firebase.initializeApp(firebaseConfig);
-const uploadImageBtn=document.querySelector('#upload-image')
-uploadImageBtn.addEventListener('click',uploadImage)
-function uploadImage(){
-    let uploadPhoto=document.querySelector("#user-photo-up").files[0]
-    firebase.storage().ref('Images').child(uploadPhoto.name).put(uploadPhoto).then(res => {
-        console.log("success")
-    }).catch(e=>{
-   console.log(e)
+const auth = firebase.auth()
+const storage = firebase.storage()
+const uploadImageBtn = document.querySelector('#upload-image-btn')
+const userPhoto = document.querySelector('#user-photo')
+
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        const userId = user.uid
+        uploadImageBtn.addEventListener('click', () => {
+            uploadImage(userId);
+        });
+    }
+    else {
+        window.location = "./index.html"
+    }
+});
+
+function uploadImage(userId) {
+    let uploadPhoto = document.querySelector("#user-photo-up").files[0];
+    const uploadPhotoStorage = storage.ref('user/profilePicture/' + userId)
+    uploadPhotoStorage.put(uploadPhoto).then(res => {
+        getUploadedUrl(uploadPhotoStorage)
+    }).catch(e => {
+        console.log(e)
     })
-
 }
-uploadImageBtn.addEventListener('click',uploadImage)
 
+function getUploadedUrl(uploadPhotoStorage) {
+    uploadPhotoStorage.getDownloadURL().then((url) => {
+        const imageUrl = url;
+        updateImage(imageUrl)
+    }).catch(e => {
+        console.log(e)
+    })
+}
 
+function updateImage(url) {
+    userPhoto.setAttribute('src', url)
+}
