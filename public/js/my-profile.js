@@ -18,7 +18,7 @@ auth.onAuthStateChanged((user) => {
 });
 
 function uploadImage(uploadPhotoStorage) {
-    let uploadPhoto = document.querySelector("#user-photo-up").files[0];
+    let uploadPhoto = document.querySelector("#user-photo-input").files[0];
     uploadPhotoStorage.put(uploadPhoto).then(res => {
         getUploadedUrl(uploadPhotoStorage)
     }).catch(e => {
