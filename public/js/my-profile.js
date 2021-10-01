@@ -8,18 +8,22 @@ auth.onAuthStateChanged((user) => {
         const userId = user.uid
         const uploadPhotoStorage = storage.ref('user/profilePicture/' + userId)
         getUploadedUrl(uploadPhotoStorage)
-        uploadImageBtn.addEventListener('click', () => {
-            uploadImage(uploadPhotoStorage);
-        });
+        // uploadImageBtn.addEventListener('click', () => {
+        //     uploadImage(uploadPhotoStorage);
+        // });
+         let uploadPhoto = document.querySelector("#user-photo-input")
+         uploadPhoto.addEventListener("change" , ()=>{
+             uploadImage(uploadPhoto,uploadPhotoStorage)
+         })
     }
     else {
         window.location = "./index.html"
     }
 });
 
-function uploadImage(uploadPhotoStorage) {
-    let uploadPhoto = document.querySelector("#user-photo-input").files[0];
-    uploadPhotoStorage.put(uploadPhoto).then(res => {
+function uploadImage(uploadPhoto,uploadPhotoStorage) {
+    // let uploadPhoto = document.querySelector("#user-photo-input").files[0];
+    uploadPhotoStorage.put(uploadPhoto.files[0]).then(res => {
         getUploadedUrl(uploadPhotoStorage)
     }).catch(e => {
         console.log(e)
