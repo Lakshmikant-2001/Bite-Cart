@@ -20,7 +20,12 @@ const addResBtn = document.querySelector('#add-res-btn')
 
 auth.onAuthStateChanged((user) => {
     if (user) {
-
+        addResBtn.addEventListener("click",()=>{
+            addRestaurantDet(user.uid)
+        })
+        addFoodBtn.addEventListener("click",()=>{
+            addFoodDet(user.uid)
+        })
     }
     else {
         window.location = "./index.html"
