@@ -22,10 +22,12 @@ auth.onAuthStateChanged((user) => {
     if (user) {
         addResBtn.addEventListener("click",()=>{
             addRestaurantDet(user.uid)
+            uploadResImg(user.uid)
 
         })
         addFoodBtn.addEventListener("click",()=>{
             addFoodDet(user.uid)
+            uploadFoodImg(user.uid)
         })
     }
     else {
@@ -43,11 +45,24 @@ function addRestaurantDet(uid){
 
 }
 function addFoodDet(uid){
-    firebase.database().ref('Food-Seller/' + uid +'-'+ resName.value +'/Foods/'+ uid + '-' +foodName.value).set({
+    firebase.database().ref('Food-Seller/' + uid +'-'+ resName.value +'/Foods/'+foodName.value).set({
         Food_name: foodName.value,
         Food_type: foodType.value,
         Food_price:foodPrice.value,
         Food_total_qty:foodTotalQty.value
     })
 
+}
+
+function uploadResImg(id) {
+    storage.ref("Restaurant/"+id).child("ResImage").put(resImage.files[0]).then(res => {
+    }).catch(e => {
+        console.log(e)
+    })
+}
+function uploadFoodImg(id) {
+    storage.ref("Restaurant/"+id+"/Foods/").child(foodName.value).put(foodImage.files[0]).then(res => {
+    }).catch(e => {
+        console.log(e)
+    })
 }
