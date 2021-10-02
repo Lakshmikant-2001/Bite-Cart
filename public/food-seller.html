@@ -1,16 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/buger-favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/util.css">
     <link rel="stylesheet" href="./css/food-seller.css">
-    <title>BITE-CART - foodSeller</title>
+    <title>Bite Cart - Food Seller</title>
 </head>
+
 <body>
+    <div class="restaurant-form">
+        <label for="res-name">restaurant name:
+            <input type="text" id="res-name">
+        </label>
+        <label for="res-type">restaurant type:
+            <input type="text" id="res-type">
+        </label>
+        <label for="res-location">restaurant location
+            <input type="text" id="res-location">
+        </label>
+        <label for="res-pincode">restaurant pincode:
+            <input type="text" id="res-pincode">
+        </label>
+        <label for="res-img">restaurant image:
+            <input type="file" id="res-img">
+        </label>
+        <button id="add-res-btn" class="btn">Add restuarant</button>
+    </div>
 
-
+    <div class="add-food-form">
+        <label for="food-name">Food name:
+            <input type="text" id="food-name">
+        </label>
+        <label for="food-type">Food type:
+            <input type="text" id="food-type">
+        </label>
+        <label for="food-price">Food price:
+            <input type="text" id="food-price">
+        </label>
+        <label for="food-total-quantity">Food quantity:
+            <input type="text" id="food-total-quantity">
+        </label>
+        <label for="food-img">Food image:
+            <input type="file" id="food-img">
+        </label>
+        <button id="add-food-btn" class="btn">Add food</button>
+    </div>
     <script src="./js/food-seller.js" type="module"></script>
     <!-- firebase scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>

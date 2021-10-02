@@ -9,3 +9,16 @@
 body{
     font-family: 'Questrial', sans-serif;
 }
+
+body *{
+    margin:1rem;
+}
+
+.add-food-form,.restaurant-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn{
+    width: 200px;;
+}
