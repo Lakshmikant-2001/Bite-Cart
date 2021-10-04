@@ -16,7 +16,28 @@
     <img id="res-cover-photo" src="./assets/res-cover-img.jpg" alt="">
     <main>
         <div id="res-form">
-
+            <input type="text" id="res-name" value="Paapu Restaurant" readonly>
+            <div class="res-det-div">
+                <div id="res-det-div-left">
+                    <div>
+                        <img src="./assets/location-icon.png" alt="" class="res-det-icons">
+                        <input type="text" id="res-location" value="Saravanampatti" readonly>
+                        <!-- <input type="text" id="res-pincode" value="641035" readonly> -->
+                    </div>
+                    <div>
+                        <img src="./assets/cusine-icon.png" alt="" class="res-det-icons">
+                        <input type="text" id="res-type" value="South Indian, Chinese" readonly>
+                    </div>
+                    <div>
+                        <img src="./assets/badge-icon.png" alt="" class="res-det-icons">
+                        <input type="text" id="res-badge" value="max-safety" readonly>
+                    </div>
+                </div>
+                <div id="res-det-div-right">
+                    <img src="./assets/res-img.jpg" alt="" id="res-img" >
+                        <input type="file" id="res-photo" readonly>
+                </div>
+            </div>
         </div>
     </main>
     <!-- <div class="restaurant-form">
@@ -27,14 +48,11 @@
             <input type="text" id="res-type">
         </label>
         <label for="res-location">restaurant location
-            <input type="text" id="res-location">
         </label>
         <label for="res-pincode">restaurant pincode:
             <input type="text" id="res-pincode">
         </label>
-        <label for="res-img">restaurant image:
-            <input type="file" id="res-img">
-        </label>
+      
         <button id="add-res-btn" class="btn">Add restuarant</button>
     </div>
 
@@ -56,7 +74,8 @@
         </label>
         <button id="add-food-btn" class="btn">Add food</button>
     </div> -->
-    <script src="./js/food-seller.js" type="module"></script>
+    
+    <!-- <script src="./js/food-seller.js" type="module"></script> -->
     <!-- firebase scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
@@ -64,4 +83,5 @@
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"></script>
     <!-- firebase scripts -->
 </body>
+
 </html>
