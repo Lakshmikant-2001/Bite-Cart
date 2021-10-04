@@ -75,7 +75,7 @@ function userFormGenerate(user) {
   formDiv.remove();
   formWrapper.innerHTML = `
   <div class="user-form-div">
-    <div id="user-acc-type-div">
+    <div id="user-acc-type-div" name='buyer'>
       <h2 id="acc-type-buyer">Buyer</h2>
       <h2 id="acc-type-seller">Seller</h2>
     </div>
@@ -98,6 +98,7 @@ function userFormGenerate(user) {
   const buyerForm = document.querySelector("#buyer-form")
   const sellerForm = document.querySelector("#seller-form")
   const userDetBtn = document.querySelector('#user-det-btn');
+  const accType = document.querySelector("#user-acc-type-div");
 
   userTypeSellerBtn.addEventListener('click', () => {
     buyerForm.style.display="none"
@@ -106,6 +107,8 @@ function userFormGenerate(user) {
     userTypeBuyerBtn.style.color="#6d6a6a"
     userTypeSellerBtn.style.backgroundColor="#fa5953"
     userTypeSellerBtn.style.color="#fff"
+    accType.removeAttribute('name')
+    accType.setAttribute('name','seller')
   })
   userTypeBuyerBtn.addEventListener('click', () => {
     sellerForm.style.display="none"
@@ -114,14 +117,16 @@ function userFormGenerate(user) {
     userTypeSellerBtn.style.color="#6d6a6a"
     userTypeBuyerBtn.style.backgroundColor="#fa5953"
     userTypeBuyerBtn.style.color="#fff"
+    accType.setAttribute('name','buyer')
   })
 
   userDetBtn.addEventListener('click', () => {
-    writeInDb(user)
+    writeInDb(user,accType)
   })
 }
 
-function writeInDb(user) {
+function writeInDb(user,accType) {
+  const userType = accType.getAttribute('name')
   const imageUrl = user.photoURL
   const userName = document.querySelector('#u-name').value
   const userMobileNo = document.querySelector('#u-mob-no').value
@@ -131,6 +136,7 @@ function writeInDb(user) {
   const userPincode = document.querySelector('#u-pincode').value
   firebase.database().ref('users/' + user.uid + '/user-details/').set({
     username: userName,
+    userType : userType,
     userMobileNo: userMobileNo,
     profile_picture: imageUrl,
     doorNo: userDoorNo,
@@ -142,7 +148,12 @@ function writeInDb(user) {
 
     }
     else {
-      window.location = "./landing-page.html"
+      if(userType=="buyer"){
+        window.location = "./landing-page.html"
+      }
+      else{
+        window.location="./food-seller.html"
+      }
     }
   });
 }
