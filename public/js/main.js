@@ -45,13 +45,13 @@ function signInWithPhone(sentCodeId) {
 }
 
 auth.onAuthStateChanged((user) => {
-  let flag=0
-  if (user && flag==0) {
-    flag=1
+  let flag = 0
+  if (user && flag == 0) {
+    flag = 1
     userFormGenerate(user);
   }
-  else{
-      // window.location = "./landing-page.html"
+  else {
+    // window.location = "./landing-page.html"
   }
 });
 
@@ -75,18 +75,47 @@ function userFormGenerate(user) {
   formDiv.remove();
   formWrapper.innerHTML = `
   <div class="user-form-div">
-  <div id="user-acc-type-div">
-    <h2 id="acc-type-buyer">Buyer</h2>
-    <h2 id="acc-type-seller">Seller</h2>
+    <div id="user-acc-type-div">
+      <h2 id="acc-type-buyer">Buyer</h2>
+      <h2 id="acc-type-seller">Seller</h2>
+    </div>
+    <div id="buyer-form">
+      <input type='text' placeholder='Enter your name' id='u-name'/>
+      <input type='number' placeholder='Enter your mobile no' id='u-mob-no'/>
+      <input type='text' placeholder='Door no' id='u-door-no' /> 
+      <input type='text' placeholder='Street name' id='u-street-name' />
+      <input type='text' placeholder='Area' id='u-area' /> 
+      <input type='number' placeholder='Pincode' id='u-pincode' /> 
+    </div>
+    <div id="seller-form">
+      <input type='text' placeholder='Enter your name'/>
+      <input type='number' placeholder='Enter your mobile no'/>
   </div>
-    <input type='text' placeholder='Enter your name' id='u-name'/>
-    <input type='text' placeholder='Door no' id='u-door-no' /> 
-    <input type='text' placeholder='Street name' id='u-street-name' />
-    <input type='text' placeholder='Area' id='u-area' /> 
-    <input type='text' placeholder='Pincode' id='u-pincode' /> 
-    <button id='user-det-btn' class="btn">Submit</button>
+  <button id='user-det-btn' class="btn">Submit</button>
   </div>`;
+  const userTypeBuyerBtn = document.querySelector('#acc-type-buyer')
+  const userTypeSellerBtn = document.querySelector('#acc-type-seller')
+  const buyerForm = document.querySelector("#buyer-form")
+  const sellerForm = document.querySelector("#seller-form")
   const userDetBtn = document.querySelector('#user-det-btn');
+
+  userTypeSellerBtn.addEventListener('click', () => {
+    buyerForm.style.display="none"
+    sellerForm.style.display="flex"
+    userTypeBuyerBtn.style.backgroundColor="#fff"
+    userTypeBuyerBtn.style.color="#6d6a6a"
+    userTypeSellerBtn.style.backgroundColor="#fa5953"
+    userTypeSellerBtn.style.color="#fff"
+  })
+  userTypeBuyerBtn.addEventListener('click', () => {
+    sellerForm.style.display="none"
+    buyerForm.style.display="flex"
+    userTypeSellerBtn.style.backgroundColor="#fff"
+    userTypeSellerBtn.style.color="#6d6a6a"
+    userTypeBuyerBtn.style.backgroundColor="#fa5953"
+    userTypeBuyerBtn.style.color="#fff"
+  })
+
   userDetBtn.addEventListener('click', () => {
     writeInDb(user)
   })
@@ -95,19 +124,23 @@ function userFormGenerate(user) {
 function writeInDb(user) {
   const imageUrl = user.photoURL
   const userName = document.querySelector('#u-name').value
+  const userMobileNo = document.querySelector('#u-mob-no').value
   const userDoorNo = document.querySelector('#u-door-no').value
   const userStreetName = document.querySelector('#u-street-name').value
   const userArea = document.querySelector('#u-area').value
   const userPincode = document.querySelector('#u-pincode').value
-  firebase.database().ref('users/' + user.uid +'/user-details/').set({
+  firebase.database().ref('users/' + user.uid + '/user-details/').set({
     username: userName,
+    userMobileNo: userMobileNo,
     profile_picture: imageUrl,
-    doorNo:userDoorNo,
-    streetName:userStreetName,
-    area:userArea,
-    pincode:userPincode
-   }, (error) => {
-    if (error) { }
+    doorNo: userDoorNo,
+    streetName: userStreetName,
+    area: userArea,
+    pincode: userPincode
+  }, (error) => {
+    if (error) {
+
+    }
     else {
       window.location = "./landing-page.html"
     }

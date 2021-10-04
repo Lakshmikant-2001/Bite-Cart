@@ -223,13 +223,13 @@ main {
 #code-input::placeholder {
   color: #6d6a6a80;
 }
-
+/* --- user details form start --- */
 .user-form-div {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 3rem 0;
+  padding: 2rem 0;
 }
 
 .user-form-div label{
@@ -258,7 +258,7 @@ input::-webkit-inner-spin-button {
   width: 75%;
   display: flex;
   border-radius:.5rem .5rem 0 0;
-  margin:1rem 3rem 3rem;
+  margin:1rem 3rem 2rem;
   cursor: pointer;
   box-shadow: 3px 3px 10px #00000050,-1px -2px 100px #00000050;
 }
@@ -281,8 +281,21 @@ input::-webkit-inner-spin-button {
 #acc-type-seller{
   border-radius: 0 .4rem  0 0;
 }
+#buyer-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
 
+#seller-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  display: none;
+}
 #user-det-btn{
   width: 50%;
-  margin-top:2rem;
+  margin-top:1.5rem;
 }
