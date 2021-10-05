@@ -41,7 +41,7 @@ input:focus {
 
 #res-form {
     width: 53vw;
-    height: 60vh;
+    height: 63vh;
     min-width: 850px;
     min-height: 550px;
     background-color: #2B2929;
@@ -95,6 +95,13 @@ input:focus {
 
 #res-det-div-left div{
     display: flex;
+    /* justify-content: start; */
+}
+
+#res-det-div-left :first-child > div{
+    display: flex;
+    flex-direction: column;
+    margin:0;
 }
 
 .res-det-icons{
@@ -112,6 +119,10 @@ input:focus {
     border:7px solid #fff;
 }
 
+#res-pincode{
+    /* margin-left:5rem; */
+}
 #food-card-section{
     height: 100vh;
 }
+
