@@ -45,51 +45,38 @@
                 </div>
             </div>
         </section>
-        <section id="food-card-section">
+        <section id="food-form-section">
+            <div class="add-food-form">
+                <h2>Add Foods form</h2>
+                <label for="food-name">Food name:
+                    <input type="text" id="food-name">
+                </label>
+                <label for="food-type">Food type:
+                    <input type="text" id="food-type">
+                </label>
+                <label for="food-price">Food price:
+                    <input type="text" id="food-price">
+                </label>
+                <label for="food-total-quantity">Food quantity:
+                    <input type="text" id="food-total-quantity">
+                </label>
+                <label for="food-img" id="food-img-label">Food image
+                    <input type="file" id="food-img">
+                </label>
+                <button id="add-food-btn" class="btn">Add food</button>
+            </div>
+        </section>
 
+        <section id="food-cards-container">
         </section>
     </main>
-    <!-- <div class="restaurant-form">
-        <label for="res-name">restaurant name:
-            <input type="text" id="res-name">
-        </label>
-        <label for="res-type">restaurant type:
-            <input type="text" id="res-type">
-        </label>
-        <label for="res-location">restaurant location
-        </label>
-        <label for="res-pincode">restaurant pincode:
-            <input type="text" id="res-pincode">
-        </label>
-      
-        <button id="add-res-btn" class="btn">Add restuarant</button>
-    </div>
 
-    <div class="add-food-form">
-        <label for="food-name">Food name:
-            <input type="text" id="food-name">
-        </label>
-        <label for="food-type">Food type:
-            <input type="text" id="food-type">
-        </label>
-        <label for="food-price">Food price:
-            <input type="text" id="food-price">
-        </label>
-        <label for="food-total-quantity">Food quantity:
-            <input type="text" id="food-total-quantity">
-        </label>
-        <label for="food-img">Food image:
-            <input type="file" id="food-img">
-        </label>
-        <button id="add-food-btn" class="btn">Add food</button>
-    </div> -->
-
-    <!-- <script src="./js/food-seller.js" type="module"></script> -->
+    <script src="./js/food-seller.js" type="module"></script>
     <!-- firebase scripts -->
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <!-- firebase scripts -->
 </body>
 
