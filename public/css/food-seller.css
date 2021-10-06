@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color:inherit;
+    color: inherit;
     font-family: inherit;
     font-size: inherit;
 }
@@ -10,8 +10,6 @@
 body {
     font-family: 'Questrial', sans-serif;
 }
-
-
 
 input {
     border: none;
@@ -51,9 +49,9 @@ input:focus {
     display: flex;
     flex-direction: column;
     font-family: 'Passion One', cursive;
-    color:#fff;
-    padding:0 2.5rem;
-    font-size:2.2rem;
+    color: #fff;
+    padding: 0 2.5rem;
+    font-size: 2.2rem;
     margin-top: 2rem;
 }
 
@@ -81,195 +79,196 @@ input:focus {
     padding: 1.3rem 0 0;
 }
 
-.res-det-div{
+.res-det-div {
     margin-top: 1.2rem !important;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
-#res-det-div-left{
+#res-det-div-left {
     display: flex;
     flex-direction: column;
 }
 
-#res-det-div-left div{
+#res-det-div-left div {
     display: flex;
     /* justify-content: start; */
 }
 
-#res-det-div-left :first-child > div{
+#res-det-div-left :first-child>div {
     display: flex;
     flex-direction: column;
-    margin:0;
+    margin: 0;
 }
 
-.res-det-icons{
+.res-det-icons {
     width: 40px;
 }
 
-#res-det-div-right input{
+#res-det-div-right input {
     display: none;
 }
 
-#res-img{
+#res-img {
     width: 300px;
     height: 300px;
-    border-radius:50%;
-    border:7px solid #fff;
+    border-radius: 50%;
+    border: 7px solid #fff;
 }
-
 
 /* ---Foods Card start---- */
 
-#food-cards-container{
+#food-cards-container {
     display: flex;
     flex-wrap: wrap;
-    margin:2rem 0;
+    margin: 2rem 0;
     justify-content: center;
 }
 
-.food-card{
+.food-card {
     width: 390px;
-    box-shadow:-2px 0 6px  #00000050,2px 0 6px  #00000050;
-    font-size:1.5rem;
-    color:#00000099;
-    margin:2rem;
-    display:flex;
+    box-shadow: -2px 0 6px #00000050, 2px 0 6px #00000050;
+    font-size: 1.5rem;
+    color: #00000099;
+    margin: 2rem;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    border-top:6px solid #f17171;
-    border-bottom:6px solid #00000050;
+    border-top: 6px solid #f17171;
+    border-bottom: 6px solid #00000050;
     position: relative;
     padding-bottom: .5rem;
     /* transition: transform .75s ease-in-out; */
     transition: all .75s ease-in-out;
 }
 
-.food-card::after,.food-card::before{
+.food-card::after, .food-card::before {
     content: "";
     width: 80px;
-    height:80px;
-    border-radius:50%;
+    height: 80px;
+    border-radius: 50%;
     background-color: #ffffff;
-    position:absolute;   
+    position: absolute;
     transition: all .75s ease-in-out;
 }
 
-.food-card::after{
-    top:-8px;
-    left:calc(50% - 40px);
-    transform:translateY(-50%);
+.food-card::after {
+    top: -8px;
+    left: calc(50% - 40px);
+    transform: translateY(-50%);
     border-bottom: 9px solid #f17171;
 }
 
-.food-card::before{
-    bottom:-8px;
-    left:calc(50% - 40px);
-    transform:translateY(50%);
+.food-card::before {
+    bottom: -8px;
+    left: calc(50% - 40px);
+    transform: translateY(50%);
     border-top: 9px solid #00000050;
 }
 
-.food-card:hover{
-    transform:scale(1.015);
-    border-top:6px solid #F63B35;
-    border-bottom:6px solid #00000060;
+.food-card:hover {
+    transform: scale(1.015);
+    border-top: 6px solid #F63B35;
+    border-bottom: 6px solid #00000060;
     box-shadow: 10px 0 20px #00000050;
 }
 
-.food-card:hover::after{
+.food-card:hover::after {
     border-bottom: 9px solid #F63B35;
 }
 
-.food-card:hover::before{
+.food-card:hover::before {
     border-top: 9px solid #00000060;
 }
 
-.food-type-logo{
+.food-type-logo {
     position: absolute;
     width: 35px;
-    top:10px;
+    top: 10px;
     right: 10px;
 }
 
-.food-image{
+.food-image {
     height: 260px;
     width: 100%;
-    border-bottom:4px solid #E45757;
+    border-bottom: 4px solid #E45757;
     backdrop-filter: 10px;
 }
 
-.card-footer{
-    font-size:1.2rem;
-    margin:2rem 0 1rem;
-    padding:0 1rem;
-    display:flex;
+.card-footer {
+    font-size: 1.2rem;
+    margin: 2rem 0 1rem;
+    padding: 0 1rem;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.card-footer h4{
+.card-footer h4 {
     margin-bottom: 1rem;
 }
 
-.add-btn{
+.add-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    background:url(../assets/add.png) no-repeat;
+    background: url(../assets/add.png) no-repeat;
     min-width: 100px;
     min-height: 56px;
-    color:#E45757;
+    color: #E45757;
     font-weight: bold;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 /* ---Foods Card end---- */
 
 /* --- Food form section start --- */
-#food-form-section{
+
+#food-form-section {
     margin-bottom: 10rem;
     display: flex;
     justify-content: center;
 }
 
-.add-food-form{
-    display:flex;
+.add-food-form {
+    display: flex;
     flex-direction: column;
     box-shadow: 5px 10px 30px #2B2929, -2px -3px 30px #2B2929;
-    padding:3rem;
+    padding: 3rem;
     font-family: 'Passion One', cursive;
-    font-size:2rem;
-    background-color:#2B2929;
-    color:#fff;
+    font-size: 2rem;
+    background-color: #2B2929;
+    color: #fff;
 }
 
-.add-food-form h2{
-    color:#F63B35;
+.add-food-form h2 {
+    color: #f17171;
+    text-shadow: 5px 7px #00000080;
     text-align: center;
     font-size: 3rem;
     font-weight: unset;
-    margin-bottom:1rem;
+    margin-bottom: 1rem;
 }
 
-
-.add-food-form label{
-    margin:2rem;
-}
-.add-food-form input{
-    color:#fff;
+.add-food-form label {
+    margin: 2rem;
 }
 
-.add-food-form input:focus{
-    border-bottom:2px solid #f17171;
+.add-food-form input {
+    color: #fff;
 }
 
-#food-img{
+.add-food-form input:focus {
+    border-bottom: 2px solid #f17171;
+}
+
+#food-img {
     display: none;
 }
 
-#add-food-btn{
-    margin:2rem 0 1rem;
+#add-food-btn {
+    margin: 2rem 0 1rem;
 }
 
 .btn {
@@ -283,14 +282,13 @@ input:focus {
     color: #fff;
     cursor: pointer;
     transition: box-shadow .3s ease-in-out, transform .3s ease-in-out;
-  }
-  
+}
 
-  #food-img-label{
-      border:2px solid #f17171;
-      padding:0.5rem 2rem;
-      border-radius: 1rem;
-      width: 40%;
-      cursor:pointer;
-  }
+#food-img-label {
+    border: 2px solid #f17171;
+    padding: 0.5rem 2rem;
+    border-radius: 1rem;
+    width: 40%;
+    cursor: pointer;
+}
 /* --- Food form section end --- */

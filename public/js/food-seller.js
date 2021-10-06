@@ -81,8 +81,8 @@ function createCard(){
         type.setAttribute('src', `./assets/non-veg-icon.png`)
     }
     name.textContent = foodName.value
-    price.textContent += foodPrice.value
-    quantity.textContent += foodTotalQty.value
+    price.textContent = foodPrice.value + " $"
+    quantity.textContent = "Qty: " + foodTotalQty.value 
     const url = URL.createObjectURL(foodImage.files[0]);
     image.setAttribute('src', url)
 }
