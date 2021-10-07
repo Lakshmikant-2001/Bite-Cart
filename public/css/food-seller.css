@@ -226,16 +226,19 @@ input:focus {
 /* --- Food form section start --- */
 
 #food-form-section {
-    margin-bottom: 10rem;
+    height: 100vh;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .add-food-form {
+    width: 610px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     box-shadow: 5px 10px 30px #2B2929, -2px -3px 30px #2B2929;
-    padding: 3rem;
+    padding: 3rem 4.5rem;
     font-family: 'Passion One', cursive;
     font-size: 2rem;
     background-color: #2B2929;
@@ -252,11 +255,18 @@ input:focus {
 }
 
 .add-food-form label {
-    margin: 2rem;
+    width: 100%;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .add-food-form input {
     color: #fff;
+    border-bottom: 2px solid #fff;
+    flex-grow: 1;
+    margin-left: 1rem;
 }
 
 .add-food-form input:focus {
@@ -272,9 +282,10 @@ input:focus {
 }
 
 .btn {
+    width: 100%;
     padding: 0.5rem 1rem;
     font-family: inherit;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     background-color: #f17171;
     box-shadow: 3px 3px 4px #00000050, -2px 5px 4px #00000050, 0px -1px 4px #00000050, 0 3px 4px #00000050;
     border: unset;
@@ -285,10 +296,17 @@ input:focus {
 }
 
 #food-img-label {
+    align-self: flex-start;
+    display: unset;
+    text-align: center;
     border: 2px solid #f17171;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1.5rem;
     border-radius: 1rem;
-    width: 40%;
+    width: unset;
     cursor: pointer;
+    font-size:1.5rem;
+}
+#food-img-label span{
+    margin-right: .5rem;
 }
 /* --- Food form section end --- */
