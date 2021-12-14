@@ -1,18 +1,36 @@
 import { firebaseConfig } from "./firebase-modules.js"
+
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-
 let provider = new firebase.auth.GoogleAuthProvider();
-const googleSignIn = document.getElementById('google-sign-in');
-const getCodeBtn = document.getElementById('get-code-btn');
 
 window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
-
 recaptchaVerifier.render().then(widgetId => {
   window.recaptchaWidgetId = widgetId;
 })
 
-function displayEnterCodeDiv() {
+// Event listeners for google sign-in and getCode button
+const googleSignInBtn = document.getElementById('google-sign-in-btn');
+const getCodeBtn = document.getElementById('get-code-btn');
+
+getCodeBtn.addEventListener('click', getPhoneNumber);
+googleSignInBtn.addEventListener('click', googleSignIn);
+
+//google sign-in 
+function googleSignIn() {
+  const body = document.querySelector('body');
+  body.style.filter = "blur(30px)";
+  googleSignInBtn.removeEventListener('click', googleSignIn);
+  auth.signInWithPopup(provider).then(res => {
+    body.style.filter = "none";
+  }).catch(e => {
+    body.style.filter = "none";
+    googleSignInBtn.addEventListener('click', googleSignIn);
+  })
+}
+
+//mobile-phone sign-in
+function getPhoneNumber() {
   const formDiv = document.querySelector('.form-cnt');
   const verifyCodeDiv = document.querySelector('#verify-code-div');
   const phoneNumber = `+91${document.querySelector('#phone-no').value}`;
@@ -44,31 +62,33 @@ function signInWithPhone(sentCodeId) {
     })
 }
 
-auth.onAuthStateChanged((user) => {
-  let flag = 0
-  if (user && flag == 0) {
-    flag = 1
-    userFormGenerate(user);
+// Auth state change
+auth.onAuthStateChanged(user => {
+  if (user) {
+    console.log(user);
+    console.log("user")
+    checkInDb(user)
   }
   else {
-    // window.location = "./landing-page.html"
+    console.log("NoUser")
   }
 });
 
-function googleLogin() {
-  const body = document.querySelector('body');
-  body.style.filter = "blur(30px)";
-  googleSignIn.removeEventListener('click', googleLogin);
-  auth.signInWithPopup(provider).then(res => {
-    console.log(res.user);
-    body.style.filter = "none";
-  }).catch(e => {
-    body.style.filter = "none";
-    googleSignIn.addEventListener('click', googleLogin);
+//Check user in DB
+function checkInDb(user) {
+  firebase.database().ref('users/' + user.uid + '/user-details/').on('value', (snapshot) => {
+    const data = snapshot.val();
+    if (data == null) {
+      userFormGenerate(user)
+    }
+    else {
+      const userType = data.userType;
+      pageFind(userType)
+    }
   })
 }
 
-
+//user Form
 function userFormGenerate(user) {
   const formDiv = document.querySelector('.form-cnt');
   const formWrapper = document.querySelector('.form-wrapper')
@@ -101,31 +121,31 @@ function userFormGenerate(user) {
   const accType = document.querySelector("#user-acc-type-div");
 
   userTypeSellerBtn.addEventListener('click', () => {
-    buyerForm.style.display="none"
-    sellerForm.style.display="flex"
-    userTypeBuyerBtn.style.backgroundColor="#fff"
-    userTypeBuyerBtn.style.color="#6d6a6a"
-    userTypeSellerBtn.style.backgroundColor="#fa5953"
-    userTypeSellerBtn.style.color="#fff"
+    buyerForm.style.display = "none"
+    sellerForm.style.display = "flex"
+    userTypeBuyerBtn.style.backgroundColor = "#fff"
+    userTypeBuyerBtn.style.color = "#6d6a6a"
+    userTypeSellerBtn.style.backgroundColor = "#fa5953"
+    userTypeSellerBtn.style.color = "#fff"
     accType.removeAttribute('name')
-    accType.setAttribute('name','seller')
+    accType.setAttribute('name', 'seller')
   })
   userTypeBuyerBtn.addEventListener('click', () => {
-    sellerForm.style.display="none"
-    buyerForm.style.display="flex"
-    userTypeSellerBtn.style.backgroundColor="#fff"
-    userTypeSellerBtn.style.color="#6d6a6a"
-    userTypeBuyerBtn.style.backgroundColor="#fa5953"
-    userTypeBuyerBtn.style.color="#fff"
-    accType.setAttribute('name','buyer')
+    sellerForm.style.display = "none"
+    buyerForm.style.display = "flex"
+    userTypeSellerBtn.style.backgroundColor = "#fff"
+    userTypeSellerBtn.style.color = "#6d6a6a"
+    userTypeBuyerBtn.style.backgroundColor = "#fa5953"
+    userTypeBuyerBtn.style.color = "#fff"
+    accType.setAttribute('name', 'buyer')
   })
 
   userDetBtn.addEventListener('click', () => {
-    writeInDb(user,accType)
+    writeInDb(user, accType)
   })
 }
-
-function writeInDb(user,accType) {
+//store User Details
+function writeInDb(user, accType) {
   const userType = accType.getAttribute('name')
   const imageUrl = user.photoURL
   const userName = document.querySelector('#u-name').value
@@ -136,7 +156,7 @@ function writeInDb(user,accType) {
   const userPincode = document.querySelector('#u-pincode').value
   firebase.database().ref('users/' + user.uid + '/user-details/').set({
     username: userName,
-    userType : userType,
+    userType: userType,
     userMobileNo: userMobileNo,
     profile_picture: imageUrl,
     doorNo: userDoorNo,
@@ -145,19 +165,20 @@ function writeInDb(user,accType) {
     pincode: userPincode
   }, (error) => {
     if (error) {
-
+      console.log(error)
     }
     else {
-      if(userType=="buyer"){
-        window.location = "./landing-page.html"
-      }
-      else{
-        window.location="./food-seller.html"
-      }
+      pageFind(userType)
     }
   });
 }
 
-getCodeBtn.addEventListener('click', displayEnterCodeDiv);
-googleSignIn.addEventListener('click', googleLogin);
-
+//Redirect into respective user pages
+function pageFind(userType){
+  if (userType == "buyer") {
+    window.location = "./landing-page.html"
+  }
+  else {
+    window.location = "./food-seller.html"
+  }
+}
