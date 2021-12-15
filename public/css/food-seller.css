@@ -309,4 +309,9 @@ input:focus {
 #food-img-label span{
     margin-right: .5rem;
 }
+
+#food-type-wrapper{
+    display:flex;
+    width: 100%;
+}
 /* --- Food form section end --- */

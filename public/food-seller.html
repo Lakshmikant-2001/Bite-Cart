@@ -51,9 +51,15 @@
                 <label for="food-name">Food name:
                     <input type="text" id="food-name">
                 </label>
-                <label for="food-type">Food type:
-                    <input type="text" id="food-type">
-                </label>
+                <div id="food-type-wrapper">
+                    <p>Food Type:</p>
+                    <div id="food-type-div">
+                        <input type="radio" name="food-type" id="veg" value="veg" >
+                        Veg
+                        <input type="radio" name="food-type" id="non-veg" value="non-veg" >
+                        Non veg
+                    </div>
+                </div>
                 <label for="food-price">Food price:
                     <input type="text" id="food-price">
                 </label>
