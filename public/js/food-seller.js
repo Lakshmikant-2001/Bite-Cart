@@ -5,27 +5,38 @@ const database = firebase.database()
 const auth = firebase.auth()
 const storage = firebase.storage()
 
+//Query Selectors -  all Form Fields
 // const resName = document.querySelector('#res-name')
 // const resType = document.querySelector('#res-type') 
 // const resLocation = document.querySelector('#res-location') 
 // const resPincode = document.querySelector('#res-pincode') 
 // const resImage = document.querySelector('#res-img') 
 // const addResBtn = document.querySelector('#add-res-btn') 
-const foodName = document.querySelector('#food-name') 
-const foodType = document.querySelector('#food-type') 
-const foodPrice = document.querySelector('#food-price') 
-const foodTotalQty = document.querySelector('#food-total-quantity') 
-const foodImage = document.querySelector('#food-img') 
-const addFoodBtn = document.querySelector('#add-food-btn') 
+const foodName = document.querySelector('#food-name')
+const vegType = document.querySelector('#veg');
+const nonvegType = document.querySelector('#non-veg');
+let foodType;
+if (vegType.checked) {
+    foodType = vegType;
+}
+else {
+    foodType = nonvegType;
+}
+const foodPrice = document.querySelector('#food-price')
+const foodTotalQty = document.querySelector('#food-total-quantity')
+const foodImage = document.querySelector('#food-img')
+const addFoodBtn = document.querySelector('#add-food-btn')
 
+//Check user
 auth.onAuthStateChanged((user) => {
     if (user) {
-        const dbref = `Food-Seller/${user.uid}`
+        const dbRef = `Food-Seller/${user.uid}`
         const storageRef = `Restaurant/${user.uid}`
-        addFoodBtn.addEventListener("click",()=>{
-            addFoodDet(dbref)
+        getFoodData(dbRef, storageRef)
+        addFoodBtn.addEventListener("click", () => {
+            resetFoodDiv()
+            addFoodDet(dbRef)
             uploadFoodImg(storageRef)
-            createCard()
         })
     }
     else {
@@ -33,56 +44,84 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
-function addFoodDet(dbref){
-    database.ref(`${dbref}/Foods/${foodName.value}`).set({
+//Add Food Details in DB
+function addFoodDet(dbRef) {
+    database.ref(`${dbRef}/Foods/${foodName.value}`).set({
         Food_name: foodName.value,
         Food_type: foodType.value,
-        Food_price:foodPrice.value,
-        Food_total_qty:foodTotalQty.value
+        Food_price: foodPrice.value,
+        Food_total_qty: foodTotalQty.value
     })
-
 }
 
+//Upload Food Image in storage
 function uploadFoodImg(storageRef) {
     storage.ref(`${storageRef}/Food-imgs`)
-    .child(foodName.value).put(foodImage.files[0]).then(res => {
+        .child(foodName.value).put(foodImage.files[0]).then(res => {
+        }).catch(e => {
+            console.log(e)
+        })
+}
+
+//Reset Food Cards
+function resetFoodDiv(){
+    const foodCardSection = document.querySelector('#food-cards-container')
+    foodCardSection.innerHTML = ''
+}
+
+// Get Food Item Data
+function getFoodData(dbRef, storageRef) {
+    database.ref(dbRef).on('value', snapshot => {
+        const data = snapshot.val().Foods
+        let foodItems = Object.keys(data);
+        createCard(data, foodItems, storageRef)
+    })
+}
+
+//Create Food Cards
+function createCard(foodData, foodItems, storageRef) {
+    const foodCardSection = document.querySelector('#food-cards-container')
+
+    foodItems.forEach((key) => {
+        let foodTypeImg;
+        if (foodData[key].Food_type == "veg") {
+            foodTypeImg = "./assets/veg-icon.png";
+        }
+        else {
+            foodTypeImg = "./assets/non-veg-icon.png";
+        }
+        let foodName = foodData[key].Food_name;
+        let foodPrice = foodData[key].Food_price;
+        let foodTotalQty = foodData[key].Food_total_qty;
+
+        foodCardSection.innerHTML += `
+        <div class="food-card" id= ${foodName}>
+            <img src="" alt="" class="food-type-logo" >
+            <img src="" alt="" class="food-image">
+            <div class="card-footer">
+                <div>
+                    <h4 class="food-name">${foodName}</h4>
+                    <p class="food-price">$${foodPrice}</p>
+                </div>
+                <div class="add-btn">
+                    <p>Oty:${foodTotalQty}</p>
+                </div>
+            </div>
+        </div>`
+        const foodTypeTag = document.querySelector(`#${foodName} > .food-type-logo`)
+        foodTypeTag.setAttribute('src', foodTypeImg)
+        const foodImgTag = document.querySelector(`#${foodName} > .food-image`)
+        storageRef = `${storageRef}/Food-imgs/${foodName}`
+        updateFoodImage(foodImgTag, storageRef)
+    })
+}
+
+//Update Food Image in created food cards
+function updateFoodImage(foodImgTag, storageRef) {
+    storage.ref(storageRef).getDownloadURL().then((url) => {
+        const imageUrl = url;
+        foodImgTag.setAttribute('src', imageUrl)
     }).catch(e => {
         console.log(e)
     })
-}
-
-function createCard(){
-    const foodCardSection = document.querySelector('#food-cards-container')
-    foodCardSection.innerHTML += `
-    <div class="food-card">
-        <img src="" alt="" class="food-type-logo" >
-        <img src="" alt="" class="food-image">
-        <div class="card-footer">
-            <div>
-                <h4 class="food-name"></h4>
-                <p class="food-price">$</p>
-             </div>
-            <div class="add-btn">
-                <p>Oty:</p>
-            </div>
-        </div>
-    </div>`
-
-    const name = document.querySelector('.food-name')
-    const type = document.querySelector('.food-type-logo')
-    const price = document.querySelector('.food-price')
-    const quantity = document.querySelector('.add-btn')
-    const image = document.querySelector('.food-image')
-
-    if(foodType.value == "veg"){
-        type.setAttribute('src', `./assets/veg-icon.png`)
-    }
-    else{
-        type.setAttribute('src', `./assets/non-veg-icon.png`)
-    }
-    name.textContent = foodName.value
-    price.textContent = foodPrice.value + " $"
-    quantity.textContent = "Qty: " + foodTotalQty.value 
-    const url = URL.createObjectURL(foodImage.files[0]);
-    image.setAttribute('src', url)
 }
