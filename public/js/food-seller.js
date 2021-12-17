@@ -35,8 +35,7 @@ auth.onAuthStateChanged((user) => {
         getFoodData(dbRef, storageRef)
         addFoodBtn.addEventListener("click", () => {
             resetFoodDiv()
-            addFoodDet(dbRef)
-            uploadFoodImg(storageRef)
+            uploadFoodImg(storageRef,dbRef)
         })
     }
     else {
@@ -45,25 +44,32 @@ auth.onAuthStateChanged((user) => {
 });
 
 //Add Food Details in DB
-function addFoodDet(dbRef) {
+function addFoodDet(dbRef,url) {
     database.ref(`${dbRef}/Foods/${foodName.value}`).set({
         Food_name: foodName.value,
         Food_type: foodType.value,
         Food_price: foodPrice.value,
-        Food_total_qty: foodTotalQty.value
+        Food_total_qty: foodTotalQty.value,
+        Food_photo_url:url
     })
 }
 
 //Upload Food Image in storage
-function uploadFoodImg(storageRef) {
-    storage.ref(`${storageRef}/Food-imgs`)
-        .child(foodName.value).put(foodImage.files[0]).then(res => {
-        }).catch(e => {
-            console.log(e)
+function uploadFoodImg(storageRef,dbRef) {
+    let uploadFoodImage = storage.ref(`${storageRef}/Food-imgs`)
+        .child(foodName.value).put(foodImage.files[0])
+        uploadFoodImage.on('state_changed',snapshot => {
+            
+        },err => {
+            console.log(err);
+        },() => {
+            uploadFoodImage.snapshot.ref.getDownloadURL().then(url => {
+                addFoodDet(dbRef,url)
+            })
         })
 }
 
-//Reset Food Cards
+//Reset Food Cardsd
 function resetFoodDiv(){
     const foodCardSection = document.querySelector('#food-cards-container')
     foodCardSection.innerHTML = ''
@@ -93,6 +99,7 @@ function createCard(foodData, foodItems, storageRef) {
         let foodName = foodData[key].Food_name;
         let foodPrice = foodData[key].Food_price;
         let foodTotalQty = foodData[key].Food_total_qty;
+        let foodPhotoUrl = foodData[key].Food_photo_url;
 
         foodCardSection.innerHTML += `
         <div class="food-card" id= ${foodName}>
@@ -111,17 +118,7 @@ function createCard(foodData, foodItems, storageRef) {
         const foodTypeTag = document.querySelector(`#${foodName} > .food-type-logo`)
         foodTypeTag.setAttribute('src', foodTypeImg)
         const foodImgTag = document.querySelector(`#${foodName} > .food-image`)
-        storageRef = `${storageRef}/Food-imgs/${foodName}`
-        updateFoodImage(foodImgTag, storageRef)
+        foodImgTag.setAttribute('src',foodPhotoUrl)
     })
 }
 
-//Update Food Image in created food cards
-function updateFoodImage(foodImgTag, storageRef) {
-    storage.ref(storageRef).getDownloadURL().then((url) => {
-        const imageUrl = url;
-        foodImgTag.setAttribute('src', imageUrl)
-    }).catch(e => {
-        console.log(e)
-    })
-}
