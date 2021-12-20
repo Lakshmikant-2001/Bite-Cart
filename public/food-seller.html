@@ -17,7 +17,7 @@
     <main>
         <section id="res-card-section">
             <div id="res-form">
-                <input type="text" id="res-name" value="Paapu Restaurant" readonly>
+                <input type="text" id="res-name">
                 <div class="res-det-div">
                     <div id="res-det-div-left">
                         <div>
@@ -25,22 +25,26 @@
                                 <img src="./assets/location-icon.png" alt="" class="res-det-icons">
                             </div>
                             <div>
-                                <input type="text" id="res-location" value="Saravanampatti" readonly>
-                                <input type="text" id="res-pincode" value="641035" readonly>
+                                <input type="text" id="res-location">
+                                <input type="text" id="res-pincode">
                             </div>
                         </div>
                         <div>
                             <img src="./assets/cusine-icon.png" alt="" class="res-det-icons">
-                            <input type="text" id="res-type" value="South Indian, Chinese" readonly>
+                            <input type="text" id="res-type">
                         </div>
                         <div>
                             <img src="./assets/badge-icon.png" alt="" class="res-det-icons">
-                            <input type="text" id="res-badge" value="max-safety" readonly>
+                            <input type="text" id="res-badge">
                         </div>
                     </div>
                     <div id="res-det-div-right">
-                        <img src="./assets/res-img.jpg" alt="" id="res-img">
-                        <input type="file" id="res-photo" readonly>
+                        <label for="res-img-file">
+                            <img src="./assets/user-def-img.jpg" alt="" id="res-img">
+                            <input type="file" id="res-img-file">
+                        </label>
+                        <button id="add-res-btn" class="btn">Submit</button>
+                        <button id="edit-res-btn" class="btn">Edit</button>
                     </div>
                 </div>
             </div>
@@ -54,9 +58,9 @@
                 <div id="food-type-wrapper">
                     <p>Food Type:</p>
                     <div id="food-type-div">
-                        <input type="radio" name="food-type" id="veg" value="veg" >
+                        <input type="radio" name="food-type" id="veg" value="veg">
                         Veg
-                        <input type="radio" name="food-type" id="non-veg" value="non-veg" >
+                        <input type="radio" name="food-type" id="non-veg" value="non-veg">
                         Non veg
                     </div>
                 </div>
@@ -72,11 +76,10 @@
                 <button id="add-food-btn" class="btn">Add food</button>
             </div>
         </section>
-
         <section id="food-cards-container">
         </section>
     </main>
-
+    <aside><img src="./assets/buger-favicon.png" alt=""></aside>
     <script src="./js/food-seller.js" type="module"></script>
     <!-- firebase scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>

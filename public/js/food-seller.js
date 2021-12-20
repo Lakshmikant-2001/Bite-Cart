@@ -6,12 +6,16 @@ const auth = firebase.auth()
 const storage = firebase.storage()
 
 //Query Selectors -  all Form Fields
-// const resName = document.querySelector('#res-name')
-// const resType = document.querySelector('#res-type') 
-// const resLocation = document.querySelector('#res-location') 
-// const resPincode = document.querySelector('#res-pincode') 
-// const resImage = document.querySelector('#res-img') 
-// const addResBtn = document.querySelector('#add-res-btn') 
+const resName = document.querySelector('#res-name')
+const resType = document.querySelector('#res-type')
+const resLocation = document.querySelector('#res-location')
+const resPincode = document.querySelector('#res-pincode')
+const resBadge = document.querySelector("#res-badge")
+const resImgFile = document.querySelector('#res-img-file')
+const resImg = document.querySelector('#res-img')
+const resInputs = document.querySelectorAll('#res-form input')
+const addResBtn = document.querySelector('#add-res-btn')
+const editResBtn = document.querySelector('#edit-res-btn')
 const foodName = document.querySelector('#food-name')
 const vegType = document.querySelector('#veg');
 const nonvegType = document.querySelector('#non-veg');
@@ -32,10 +36,17 @@ auth.onAuthStateChanged((user) => {
     if (user) {
         const dbRef = `Food-Seller/${user.uid}`
         const storageRef = `Restaurant/${user.uid}`
-        getFoodData(dbRef, storageRef)
+        getResData(dbRef)
+        getFoodData(dbRef)
+        editResBtn.addEventListener('click', () => {
+            changeToEditState()
+        })
+        addResBtn.addEventListener("click", () => {
+            uploadResImg(storageRef, dbRef)
+        })
         addFoodBtn.addEventListener("click", () => {
             resetFoodDiv()
-            uploadFoodImg(storageRef,dbRef)
+            uploadFoodImg(storageRef, dbRef)
         })
     }
     else {
@@ -43,49 +54,105 @@ auth.onAuthStateChanged((user) => {
     }
 });
 
+function changeToEditState() {
+    editResBtn.style.display = "none";
+    addResBtn.style.display = "unset";
+    resInputs.forEach(input => {
+        input.style.pointerEvents = "unset"
+        input.style.borderBottom = "2px dotted #ffffff"
+    })
+}
+
+function uploadResImg(storageRef, dbRef) {
+    let uploadResImage = storage.ref(`${storageRef}/Res-imgs`)
+        .child(resName.value).put(resImgFile.files[0])
+    uploadResImage.on('state_changed', snapshot => {
+        editResBtn.style.display = "unset";
+        addResBtn.style.display = "none";
+        resInputs.forEach(input => {
+            input.style.pointerEvents = "none"
+            input.style.borderBottom = "none"
+        })
+    }, err => {
+        console.log(err);
+    }, () => {
+        uploadResImage.snapshot.ref.getDownloadURL().then(url => {
+            addResDet(dbRef, url)
+        })
+    })
+}
+
+function addResDet(dbref, url) {
+    database.ref(`${dbref}/Res-det`).set({
+        Res_name: resName.value,
+        Res_location: resLocation.value,
+        Res_pin: resPincode.value,
+        Res_badge: resBadge.value,
+        Res_type: resType.value,
+        Res_url: url
+    })
+}
+
+function getResData(dbRef) {
+    database.ref(`${dbRef}/Res-det`).on('value', snapshot => {
+        const data = snapshot.val()
+        console.log(data)
+        updateResCard(data)
+    })
+}
+
+function updateResCard(data) {
+    resName.value = data.Res_name;
+    resPincode.value = data.Res_pin;
+    resType.value = data.Res_type;
+    resBadge.value = data.Res_badge;
+    resLocation.value = data.Res_location;
+    resImg.setAttribute('src', data.Res_url)
+}
+
 //Add Food Details in DB
-function addFoodDet(dbRef,url) {
+function addFoodDet(dbRef, url) {
     database.ref(`${dbRef}/Foods/${foodName.value}`).set({
         Food_name: foodName.value,
         Food_type: foodType.value,
         Food_price: foodPrice.value,
         Food_total_qty: foodTotalQty.value,
-        Food_photo_url:url
+        Food_photo_url: url
     })
 }
 
 //Upload Food Image in storage
-function uploadFoodImg(storageRef,dbRef) {
+function uploadFoodImg(storageRef, dbRef) {
     let uploadFoodImage = storage.ref(`${storageRef}/Food-imgs`)
         .child(foodName.value).put(foodImage.files[0])
         uploadFoodImage.on('state_changed',snapshot => {
             
-        },err => {
-            console.log(err);
-        },() => {
-            uploadFoodImage.snapshot.ref.getDownloadURL().then(url => {
-                addFoodDet(dbRef,url)
-            })
+    }, err => {
+        console.log(err);
+    }, () => {
+        uploadFoodImage.snapshot.ref.getDownloadURL().then(url => {
+            addFoodDet(dbRef, url)
         })
+    })
 }
 
 //Reset Food Cardsd
-function resetFoodDiv(){
+function resetFoodDiv() {
     const foodCardSection = document.querySelector('#food-cards-container')
     foodCardSection.innerHTML = ''
 }
 
 // Get Food Item Data
-function getFoodData(dbRef, storageRef) {
+function getFoodData(dbRef) {
     database.ref(dbRef).on('value', snapshot => {
         const data = snapshot.val().Foods
         let foodItems = Object.keys(data);
-        createCard(data, foodItems, storageRef)
+        createCard(data, foodItems)
     })
 }
 
 //Create Food Cards
-function createCard(foodData, foodItems, storageRef) {
+function createCard(foodData, foodItems) {
     const foodCardSection = document.querySelector('#food-cards-container')
 
     foodItems.forEach((key) => {
@@ -118,7 +185,7 @@ function createCard(foodData, foodItems, storageRef) {
         const foodTypeTag = document.querySelector(`#${foodName} > .food-type-logo`)
         foodTypeTag.setAttribute('src', foodTypeImg)
         const foodImgTag = document.querySelector(`#${foodName} > .food-image`)
-        foodImgTag.setAttribute('src',foodPhotoUrl)
+        foodImgTag.setAttribute('src', foodPhotoUrl)
     })
 }
 
