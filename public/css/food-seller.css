@@ -345,12 +345,12 @@ aside img {
 
 @keyframes rotate {
     0% {
-        transform: rotate(0turn);
+        transform:  translate(-50%, -50%) rotate(0turn);
     }
     50% {
-        transform: rotate(.5turn);
+        transform:  translate(-50%, -50%) rotate(.5turn);
     }
     100% {
-        transform: rotate(1turn);
+        transform:  translate(-50%, -50%) rotate(1turn);
     }
 }

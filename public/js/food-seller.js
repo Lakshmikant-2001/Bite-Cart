@@ -67,6 +67,10 @@ function uploadResImg(storageRef, dbRef) {
     let uploadResImage = storage.ref(`${storageRef}/Res-imgs`)
         .child(resName.value).put(resImgFile.files[0])
     uploadResImage.on('state_changed', snapshot => {
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setTimeout(() => {
+            loadingPerCheck(progress)
+        }, 1000)
         editResBtn.style.display = "unset";
         addResBtn.style.display = "none";
         resInputs.forEach(input => {
@@ -125,8 +129,11 @@ function addFoodDet(dbRef, url) {
 function uploadFoodImg(storageRef, dbRef) {
     let uploadFoodImage = storage.ref(`${storageRef}/Food-imgs`)
         .child(foodName.value).put(foodImage.files[0])
-        uploadFoodImage.on('state_changed',snapshot => {
-            
+    uploadFoodImage.on('state_changed', snapshot => {
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setTimeout(() => {
+            loadingPerCheck(progress)
+        }, 1000)
     }, err => {
         console.log(err);
     }, () => {
@@ -135,7 +142,24 @@ function uploadFoodImg(storageRef, dbRef) {
         })
     })
 }
-
+//Loading animation during storage upload
+function loadingPerCheck(progress) {
+    const main = document.querySelector('main')
+    const coverPhoto = document.querySelector('#res-cover-photo')
+    const loadingIcon = document.querySelector('aside > img')
+    if (progress < 100) {
+        main.style.display = "none"
+        coverPhoto.style.display = "none"
+        loadingIcon.style.display = "unset"
+        loadingIcon.style.animation = " rotate 3s infinite linear";
+    }
+    else {
+        main.style.display = "unset"
+        coverPhoto.style.display = "unset"
+        loadingIcon.style.display = "none"
+        loadingIcon.style.animation = "unset"
+    }
+}
 //Reset Food Cardsd
 function resetFoodDiv() {
     const foodCardSection = document.querySelector('#food-cards-container')
