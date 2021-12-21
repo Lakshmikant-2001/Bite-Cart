@@ -21,21 +21,13 @@ const addResBtn = document.querySelector('#add-res-btn')
 const editResBtn = document.querySelector('#edit-res-btn')
 const foodName = document.querySelector('#food-name')
 const vegType = document.querySelector('#veg');
-const nonvegType = document.querySelector('#non-veg');
 const foodFileName = document.querySelector('#food-file-name')
 const resFileName = document.querySelector('#res-file-name')
-
-let foodType;
-if (vegType.checked) {
-    foodType = vegType;
-}
-else {
-    foodType = nonvegType;
-}
 const foodPrice = document.querySelector('#food-price')
 const foodTotalQty = document.querySelector('#food-total-quantity')
 const foodImage = document.querySelector('#food-img')
 const addFoodBtn = document.querySelector('#add-food-btn')
+let foodType;
 
 foodImage.addEventListener('change', () => {
     foodFileName.textContent = foodImage.files[0].name
@@ -44,6 +36,7 @@ foodImage.addEventListener('change', () => {
 window.addEventListener('load', () => {
     addLoadingAnimation()
 })
+
 //Check user
 auth.onAuthStateChanged((user) => {
     if (user) {
@@ -140,9 +133,16 @@ function updateResCard(data) {
 
 //Add Food Details in DB
 function addFoodDet(dbRef, url) {
+    if (vegType.checked) {
+        foodType = "veg";
+    }
+    else {
+        foodType = "non-veg";
+    }    
+    console.log(foodType)
     database.ref(`${dbRef}/Foods/${foodName.value}`).set({
         Food_name: foodName.value,
-        Food_type: foodType.value,
+        Food_type: foodType,
         Food_price: foodPrice.value,
         Food_total_qty: foodTotalQty.value,
         Food_photo_url: url
@@ -209,7 +209,6 @@ function getFoodData(dbRef) {
 //Create Food Cards
 function createCard(foodData, foodItems) {
     const foodCardSection = document.querySelector('#food-cards-container')
-
     foodItems.forEach((key) => {
         let foodTypeImg;
         if (foodData[key].Food_type == "veg") {
