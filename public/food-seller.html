@@ -17,7 +17,7 @@
     <main>
         <section id="res-card-section">
             <div id="res-form">
-                <input type="text" id="res-name">
+                <input type="text" id="res-name" placeholder="Restaurant name">
                 <div class="res-det-div">
                     <div id="res-det-div-left">
                         <div>
@@ -25,17 +25,17 @@
                                 <img src="./assets/location-icon.png" alt="" class="res-det-icons">
                             </div>
                             <div>
-                                <input type="text" id="res-location">
-                                <input type="text" id="res-pincode">
+                                <input type="text" id="res-location" placeholder="Restaurant location">
+                                <input type="number" id="res-pincode" placeholder="Restaurant pincode">
                             </div>
                         </div>
                         <div>
                             <img src="./assets/cusine-icon.png" alt="" class="res-det-icons">
-                            <input type="text" id="res-type">
+                            <input type="text" id="res-type" placeholder="Restaurant type">
                         </div>
                         <div>
                             <img src="./assets/badge-icon.png" alt="" class="res-det-icons">
-                            <input type="text" id="res-badge">
+                            <input type="text" id="res-badge" placeholder="Restaurant badge">
                         </div>
                     </div>
                     <div id="res-det-div-right">
@@ -54,7 +54,7 @@
             <div class="add-food-form">
                 <h2>Add Foods form</h2>
                 <label for="food-name">Food name:
-                    <input type="text" id="food-name">
+                    <input type="text" id="food-name" required>
                 </label>
                 <div id="food-type-wrapper">
                     <p>Food Type:</p>
@@ -66,10 +66,10 @@
                     </div>
                 </div>
                 <label for="food-price">Food price:
-                    <input type="text" id="food-price">
+                    <input type="number" id="food-price">
                 </label>
                 <label for="food-total-quantity">Food qty:
-                    <input type="text" id="food-total-quantity">
+                    <input type="number" id="food-total-quantity">
                 </label>
                 <div id="food-img-file-div">
                     <label for="food-img" id="food-img-label"><span>+</span>img
