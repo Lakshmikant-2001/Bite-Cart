@@ -17,6 +17,7 @@ const resBadge = document.querySelector("#res-badge")
 const resImgFile = document.querySelector('#res-img-file')
 const resImg = document.querySelector('#res-img')
 const resInputs = document.querySelectorAll('#res-form input')
+const foodInputs = document.querySelectorAll('.add-food-form input')
 const addResBtn = document.querySelector('#add-res-btn')
 const editResBtn = document.querySelector('#edit-res-btn')
 const foodName = document.querySelector('#food-name')
@@ -40,6 +41,7 @@ window.addEventListener('load', () => {
 //Check user
 auth.onAuthStateChanged((user) => {
     if (user) {
+        removeLoadingAnimation()
         const dbRef = `Food-Seller/${user.uid}`
         const storageRef = `Restaurant/${user.uid}`
         getResData(dbRef)
@@ -48,18 +50,41 @@ auth.onAuthStateChanged((user) => {
             changeToEditState()
         })
         addResBtn.addEventListener("click", () => {
-            uploadResImg(storageRef, dbRef)
+            verifyValidation(resInputs,storageRef,dbRef,uploadResImg)
         })
         addFoodBtn.addEventListener("click", () => {
             resetFoodDiv()
-            uploadFoodImg(storageRef, dbRef)
+            verifyValidation(foodInputs,storageRef,dbRef,uploadFoodImg)
         })
-        removeLoadingAnimation()
     }
     else {
         window.location = "./index.html"
     }
 });
+
+function verifyValidation(inputs,storageRef,dbRef,func){
+    let result = validateForm(inputs)
+    console.log(result)
+    if (result == false) {
+        console.log("error")
+    }
+    else {
+        func(storageRef, dbRef)
+    }
+}
+
+function validateForm(inputs) {
+    console.log("call")
+    let flag = true;
+     inputs.forEach(input => {
+        let checkValid = input.checkValidity()
+        console.log(checkValid)
+        if (!checkValid) {
+             flag = false;
+        }
+    })
+    return flag;
+}
 
 function changeToEditState() {
     resFileName.style.display = "unset";
@@ -104,8 +129,8 @@ function uploadResImg(storageRef, dbRef) {
     })
 }
 
-function addResDet(dbref, url) {
-    database.ref(`${dbref}/Res-det`).set({
+function addResDet(dbRef, url) {
+    database.ref(`${dbRef}/Res-det`).set({
         Res_name: resName.value,
         Res_location: resLocation.value,
         Res_pin: resPincode.value,
@@ -138,7 +163,7 @@ function addFoodDet(dbRef, url) {
     }
     else {
         foodType = "non-veg";
-    }    
+    }
     console.log(foodType)
     database.ref(`${dbRef}/Foods/${foodName.value}`).set({
         Food_name: foodName.value,

@@ -17,7 +17,7 @@
     <main>
         <section id="res-card-section">
             <div id="res-form">
-                <input type="text" id="res-name" placeholder="Restaurant name">
+                <input type="text" id="res-name" placeholder="Restaurant name" required>
                 <div class="res-det-div">
                     <div id="res-det-div-left">
                         <div>
@@ -25,26 +25,26 @@
                                 <img src="./assets/location-icon.png" alt="" class="res-det-icons">
                             </div>
                             <div>
-                                <input type="text" id="res-location" placeholder="Restaurant location">
-                                <input type="number" id="res-pincode" placeholder="Restaurant pincode">
+                                <input type="text" id="res-location" placeholder="Restaurant location" required>
+                                <input type="number" id="res-pincode" placeholder="Restaurant pincode" required>
                             </div>
                         </div>
                         <div>
-                            <img src="./assets/cusine-icon.png" alt="" class="res-det-icons">
-                            <input type="text" id="res-type" placeholder="Restaurant type">
+                            <img src="./assets/cusine-icon.png" alt="" class="res-det-icons" >
+                            <input type="text" id="res-type" placeholder="Restaurant type" required>
                         </div>
                         <div>
                             <img src="./assets/badge-icon.png" alt="" class="res-det-icons">
-                            <input type="text" id="res-badge" placeholder="Restaurant badge">
+                            <input type="text" id="res-badge" placeholder="Restaurant badge" required>
                         </div>
                     </div>
                     <div id="res-det-div-right">
                         <label for="res-img-file">
                             <img src="./assets/user-def-img.jpg" alt="" id="res-img">
-                            <input type="file" id="res-img-file" disabled>
+                            <input type="file" id="res-img-file" disabled required>
                         </label>
                         <p id="res-file-name">No file is choosed</p>
-                        <button id="add-res-btn" class="btn">Submit</button>
+                        <button id="add-res-btn" class="btn" type="submit">Submit</button>
                         <button id="edit-res-btn" class="btn">Edit</button>
                     </div>
                 </div>
@@ -59,21 +59,21 @@
                 <div id="food-type-wrapper">
                     <p>Food Type:</p>
                     <div id="food-type-div">
-                        <input type="radio" name="food-type" id="veg" value="veg">
+                        <input type="radio" name="food-type" id="veg" value="veg" required>
                         Veg
-                        <input type="radio" name="food-type" id="non-veg" value="non-veg">
+                        <input type="radio" name="food-type" id="non-veg" value="non-veg" required>
                         Non veg
                     </div>
                 </div>
                 <label for="food-price">Food price:
-                    <input type="number" id="food-price">
+                    <input type="number" id="food-price" required>
                 </label>
                 <label for="food-total-quantity">Food qty:
-                    <input type="number" id="food-total-quantity">
+                    <input type="number" id="food-total-quantity" required>
                 </label>
                 <div id="food-img-file-div">
                     <label for="food-img" id="food-img-label"><span>+</span>img
-                        <input type="file" id="food-img">
+                        <input type="file" id="food-img" required>
                     </label>
                     <p id="food-file-name">No file is choosed</p>
                 </div>
