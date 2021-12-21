@@ -6,6 +6,9 @@ const auth = firebase.auth()
 const storage = firebase.storage()
 
 //Query Selectors -  all Form Fields
+const main = document.querySelector('main')
+const coverPhoto = document.querySelector('#res-cover-photo')
+const loadingIcon = document.querySelector('aside > img')
 const resName = document.querySelector('#res-name')
 const resType = document.querySelector('#res-type')
 const resLocation = document.querySelector('#res-location')
@@ -37,6 +40,10 @@ const addFoodBtn = document.querySelector('#add-food-btn')
 foodImage.addEventListener('change', () => {
     foodFileName.textContent = foodImage.files[0].name
 })
+
+window.addEventListener('load',()=>{
+    addLoadingAnimation()
+})
 //Check user
 auth.onAuthStateChanged((user) => {
     if (user) {
@@ -54,6 +61,7 @@ auth.onAuthStateChanged((user) => {
             resetFoodDiv()
             uploadFoodImg(storageRef, dbRef)
         })
+        removeLoadingAnimation()
     }
     else {
         window.location = "./index.html"
@@ -74,6 +82,15 @@ function changeToEditState() {
     })
 }
 
+function removeEditState() {
+    resFileName.style.display = "none"
+    editResBtn.style.display = "unset";
+    addResBtn.style.display = "none";
+    resInputs.forEach(input => {
+        input.style.pointerEvents = "none"
+        input.style.borderBottom = "none"
+    })
+}
 function uploadResImg(storageRef, dbRef) {
     let uploadResImage = storage.ref(`${storageRef}/Res-imgs`)
         .child(resName.value).put(resImgFile.files[0])
@@ -82,17 +99,7 @@ function uploadResImg(storageRef, dbRef) {
         setTimeout(() => {
             loadingPerCheck(progress)
         }, 1000)
-        resFileName.style.display = "none"
-        editResBtn.style.display = "unset";
-        addResBtn.style.display = "none";
-        resInputs.forEach(input => {
-            input.style.pointerEvents = "none"
-            input.style.borderBottom = "none"
-        })
-        // resImgFile.removeEventListener('click',() => {
-        //     const resFileName = document.querySelector('#res-file-name')
-        //     resFileName.style.display = "none"
-        // })
+        removeEditState()
     }, err => {
         console.log(err);
     }, () => {
@@ -161,22 +168,28 @@ function uploadFoodImg(storageRef, dbRef) {
 
 //Loading animation during storage upload
 function loadingPerCheck(progress) {
-    const main = document.querySelector('main')
-    const coverPhoto = document.querySelector('#res-cover-photo')
-    const loadingIcon = document.querySelector('aside > img')
     if (progress < 100) {
-        main.style.display = "none"
-        coverPhoto.style.display = "none"
-        loadingIcon.style.display = "unset"
-        loadingIcon.style.animation = " rotate 3s infinite linear";
+        addLoadingAnimation()
     }
     else {
-        main.style.display = "unset"
-        coverPhoto.style.display = "unset"
-        loadingIcon.style.display = "none"
-        loadingIcon.style.animation = "unset"
+        removeLoadingAnimation()
     }
 }
+
+function addLoadingAnimation(){
+    main.style.display = "none"
+    coverPhoto.style.display = "none"
+    loadingIcon.style.display = "unset"
+    loadingIcon.style.animation = " rotate 3s infinite linear";
+}
+
+function removeLoadingAnimation(){
+    main.style.display = "unset"
+    coverPhoto.style.display = "unset"
+    loadingIcon.style.display = "none"
+    loadingIcon.style.animation = "unset"
+}
+
 //Reset Food Cardsd
 function resetFoodDiv() {
     const foodCardSection = document.querySelector('#food-cards-container')
