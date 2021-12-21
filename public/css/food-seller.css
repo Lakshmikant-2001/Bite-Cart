@@ -125,10 +125,12 @@ input:focus {
     height: 300px;
     border-radius: 50%;
     border: 7px solid #fff;
+    user-select: none;
 }
 
 #res-img-file {
     display: none;
+    
 }
 
 #add-res-btn {

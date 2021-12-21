@@ -41,7 +41,7 @@ foodImage.addEventListener('change', () => {
     foodFileName.textContent = foodImage.files[0].name
 })
 
-window.addEventListener('load',()=>{
+window.addEventListener('load', () => {
     addLoadingAnimation()
 })
 //Check user
@@ -72,6 +72,7 @@ function changeToEditState() {
     resFileName.style.display = "unset";
     editResBtn.style.display = "none";
     addResBtn.style.display = "unset";
+    resImgFile.removeAttribute('disabled');
     resInputs.forEach(input => {
         input.style.pointerEvents = "unset"
         input.style.borderBottom = "2px dotted #ffffff"
@@ -86,6 +87,7 @@ function removeEditState() {
     resFileName.style.display = "none"
     editResBtn.style.display = "unset";
     addResBtn.style.display = "none";
+    resImgFile.setAttribute('disabled', true)
     resInputs.forEach(input => {
         input.style.pointerEvents = "none"
         input.style.borderBottom = "none"
@@ -123,7 +125,6 @@ function addResDet(dbref, url) {
 function getResData(dbRef) {
     database.ref(`${dbRef}/Res-det`).on('value', snapshot => {
         const data = snapshot.val()
-        console.log(data)
         updateResCard(data)
     })
 }
@@ -176,14 +177,14 @@ function loadingPerCheck(progress) {
     }
 }
 
-function addLoadingAnimation(){
+function addLoadingAnimation() {
     main.style.display = "none"
     coverPhoto.style.display = "none"
     loadingIcon.style.display = "unset"
     loadingIcon.style.animation = " rotate 3s infinite linear";
 }
 
-function removeLoadingAnimation(){
+function removeLoadingAnimation() {
     main.style.display = "unset"
     coverPhoto.style.display = "unset"
     loadingIcon.style.display = "none"
@@ -242,4 +243,3 @@ function createCard(foodData, foodItems) {
         foodImgTag.setAttribute('src', foodPhotoUrl)
     })
 }
-
