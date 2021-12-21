@@ -386,3 +386,13 @@ aside img {
         transform: translate(-50%, -50%) rotate(1turn);
     }
 }
+
+#form-error-message{
+    font-size:2rem;
+    color:#F63B35;
+    font-family: 'Passion One', cursive;
+    position:fixed;
+    top:2rem;
+    right:2rem;
+    display:none;
+}

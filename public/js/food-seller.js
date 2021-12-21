@@ -28,6 +28,7 @@ const foodPrice = document.querySelector('#food-price')
 const foodTotalQty = document.querySelector('#food-total-quantity')
 const foodImage = document.querySelector('#food-img')
 const addFoodBtn = document.querySelector('#add-food-btn')
+const formErrorElement = document.querySelector('#form-error-message')
 let foodType;
 
 foodImage.addEventListener('change', () => {
@@ -66,9 +67,13 @@ function verifyValidation(inputs,storageRef,dbRef,func){
     let result = validateForm(inputs)
     console.log(result)
     if (result == false) {
-        console.log("error")
+        formErrorElement.style.display="unset"
+        setTimeout(()=>{
+        formErrorElement.style.display="none"
+        },2000)
     }
     else {
+        addLoadingAnimation()
         func(storageRef, dbRef)
     }
 }
@@ -164,7 +169,6 @@ function addFoodDet(dbRef, url) {
     else {
         foodType = "non-veg";
     }
-    console.log(foodType)
     database.ref(`${dbRef}/Foods/${foodName.value}`).set({
         Food_name: foodName.value,
         Food_type: foodType,
@@ -194,10 +198,7 @@ function uploadFoodImg(storageRef, dbRef) {
 
 //Loading animation during storage upload
 function loadingPerCheck(progress) {
-    if (progress < 100) {
-        addLoadingAnimation()
-    }
-    else {
+    if(progress == 100) {
         removeLoadingAnimation()
     }
 }
