@@ -19,6 +19,9 @@ const editResBtn = document.querySelector('#edit-res-btn')
 const foodName = document.querySelector('#food-name')
 const vegType = document.querySelector('#veg');
 const nonvegType = document.querySelector('#non-veg');
+const foodFileName = document.querySelector('#food-file-name')
+const resFileName = document.querySelector('#res-file-name')
+
 let foodType;
 if (vegType.checked) {
     foodType = vegType;
@@ -31,6 +34,9 @@ const foodTotalQty = document.querySelector('#food-total-quantity')
 const foodImage = document.querySelector('#food-img')
 const addFoodBtn = document.querySelector('#add-food-btn')
 
+foodImage.addEventListener('change', () => {
+    foodFileName.textContent = foodImage.files[0].name
+})
 //Check user
 auth.onAuthStateChanged((user) => {
     if (user) {
@@ -55,11 +61,16 @@ auth.onAuthStateChanged((user) => {
 });
 
 function changeToEditState() {
+    resFileName.style.display = "unset";
     editResBtn.style.display = "none";
     addResBtn.style.display = "unset";
     resInputs.forEach(input => {
         input.style.pointerEvents = "unset"
         input.style.borderBottom = "2px dotted #ffffff"
+    })
+    resImgFile.addEventListener('change', () => {
+        resFileName.style.display = "unset"
+        resFileName.textContent = resImgFile.files[0].name
     })
 }
 
@@ -71,12 +82,17 @@ function uploadResImg(storageRef, dbRef) {
         setTimeout(() => {
             loadingPerCheck(progress)
         }, 1000)
+        resFileName.style.display = "none"
         editResBtn.style.display = "unset";
         addResBtn.style.display = "none";
         resInputs.forEach(input => {
             input.style.pointerEvents = "none"
             input.style.borderBottom = "none"
         })
+        // resImgFile.removeEventListener('click',() => {
+        //     const resFileName = document.querySelector('#res-file-name')
+        //     resFileName.style.display = "none"
+        // })
     }, err => {
         console.log(err);
     }, () => {
@@ -142,6 +158,7 @@ function uploadFoodImg(storageRef, dbRef) {
         })
     })
 }
+
 //Loading animation during storage upload
 function loadingPerCheck(progress) {
     const main = document.querySelector('main')

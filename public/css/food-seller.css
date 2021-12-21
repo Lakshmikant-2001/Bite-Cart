@@ -71,10 +71,11 @@ input:focus {
     margin: 1rem;
 }
 
-#res-form input{
+#res-form input {
     user-select: none;
     pointer-events: none;
 }
+
 #res-name {
     color: #fa5953;
     font-size: 4.2rem;
@@ -109,8 +110,9 @@ input:focus {
 .res-det-icons {
     width: 40px;
 }
-#res-det-div-right{
-    display:flex;
+
+#res-det-div-right {
+    display: flex;
     flex-direction: column;
 }
 
@@ -125,13 +127,14 @@ input:focus {
     border: 7px solid #fff;
 }
 
-#res-img-file{
-    display:none;
-}
-
-#add-res-btn{
+#res-img-file {
     display: none;
 }
+
+#add-res-btn {
+    display: none;
+}
+
 /* ---Foods Card start---- */
 
 #food-cards-container {
@@ -236,6 +239,11 @@ input:focus {
     cursor: pointer;
 }
 
+#res-file-name {
+    font-size: 1.2rem;
+    display: none;
+}
+
 /* ---Foods Card end---- */
 
 /* --- Food form section start --- */
@@ -310,6 +318,16 @@ input:focus {
     transition: box-shadow .3s ease-in-out, transform .3s ease-in-out;
 }
 
+#food-img-file-div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#food-file-name {
+    font-size: 1.2rem;
+}
+
 #food-img-label {
     align-self: flex-start;
     display: unset;
@@ -320,6 +338,7 @@ input:focus {
     width: unset;
     cursor: pointer;
     font-size: 1.5rem;
+    margin-right: 2rem;
 }
 
 #food-img-label span {
@@ -340,17 +359,19 @@ aside img {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index:10;
+    z-index: 10;
 }
 
 @keyframes rotate {
     0% {
-        transform:  translate(-50%, -50%) rotate(0turn);
+        transform: translate(-50%, -50%) rotate(0turn);
     }
+
     50% {
-        transform:  translate(-50%, -50%) rotate(.5turn);
+        transform: translate(-50%, -50%) rotate(.5turn);
     }
+
     100% {
-        transform:  translate(-50%, -50%) rotate(1turn);
+        transform: translate(-50%, -50%) rotate(1turn);
     }
 }

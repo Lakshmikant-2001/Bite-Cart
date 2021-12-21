@@ -43,6 +43,7 @@
                             <img src="./assets/user-def-img.jpg" alt="" id="res-img">
                             <input type="file" id="res-img-file">
                         </label>
+                        <p id="res-file-name">No file is choosed</p>
                         <button id="add-res-btn" class="btn">Submit</button>
                         <button id="edit-res-btn" class="btn">Edit</button>
                     </div>
@@ -70,9 +71,12 @@
                 <label for="food-total-quantity">Food qty:
                     <input type="text" id="food-total-quantity">
                 </label>
-                <label for="food-img" id="food-img-label"><span>+</span>img
-                    <input type="file" id="food-img">
-                </label>
+                <div id="food-img-file-div">
+                    <label for="food-img" id="food-img-label"><span>+</span>img
+                        <input type="file" id="food-img">
+                    </label>
+                    <p id="food-file-name">No file is choosed</p>
+                </div>
                 <button id="add-food-btn" class="btn">Add food</button>
             </div>
         </section>
