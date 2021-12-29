@@ -6,6 +6,9 @@ const auth = firebase.auth()
 
 const resCardContainer = document.querySelector("#res-cards-container");
 
+window.addEventListener('load', () => {
+    addLoadingAnimation()
+})
 
 auth.onAuthStateChanged(user => {
     if (user) {
@@ -25,14 +28,14 @@ function getUserPincode(user) {
 }
 
 function getFoodSellers(pincode) {
-    database.ref('Food-Seller').once('value').then( snapshot => {
+    database.ref('Food-Seller').once('value').then(snapshot => {
         let resData = snapshot.val()
         console.log(resData)
         const restaurants = Object.keys(resData)
         checkMatchingRes(resData, restaurants, pincode)
     }, {
         onlyOnce: true
-      })
+    })
 }
 
 function checkMatchingRes(resData, restaurants, pincode) {
@@ -47,6 +50,7 @@ function checkMatchingRes(resData, restaurants, pincode) {
 }
 
 function createResCard(resData, availableRes) {
+    removeLoadingAnimation()
     availableRes.forEach(key => {
         let resName = resData[key].Res_det.Res_name;
         let resType = resData[key].Res_det.Res_type;
@@ -70,4 +74,27 @@ function createResCard(resData, availableRes) {
         const resImageTag = document.querySelector(`#${resName} > .res-img`)
         resImageTag.setAttribute('src', resImage)
     })
+}
+
+const bodyContent = document.querySelectorAll("body *")
+const aside = document.querySelector("aside")
+const loadingIcon = document.querySelector("aside > img")
+
+
+function addLoadingAnimation() {
+    bodyContent.forEach(element => {
+        element.style.display = "none"
+    })
+    aside.style.display = "unset"
+    loadingIcon.style.display = "unset"
+    loadingIcon.style.animation = " rotate 3s infinite linear";
+}
+
+function removeLoadingAnimation() {
+    bodyContent.forEach(element => {
+        element.style.display = ""
+    })
+    aside.style.display = "none"
+    loadingIcon.style.display = "none"
+    loadingIcon.style.animation = "unset"
 }
