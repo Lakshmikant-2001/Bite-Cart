@@ -25,11 +25,14 @@ function getUserPincode(user) {
 }
 
 function getFoodSellers(pincode) {
-    database.ref('Food-Seller').on('value', snapshot => {
+    database.ref('Food-Seller').once('value').then( snapshot => {
         let resData = snapshot.val()
+        console.log(resData)
         const restaurants = Object.keys(resData)
         checkMatchingRes(resData, restaurants, pincode)
-    })
+    }, {
+        onlyOnce: true
+      })
 }
 
 function checkMatchingRes(resData, restaurants, pincode) {
@@ -44,7 +47,6 @@ function checkMatchingRes(resData, restaurants, pincode) {
 }
 
 function createResCard(resData, availableRes) {
-    console.log(resData)
     availableRes.forEach(key => {
         let resName = resData[key].Res_det.Res_name;
         let resType = resData[key].Res_det.Res_type;
@@ -52,9 +54,6 @@ function createResCard(resData, availableRes) {
         let resPincode = resData[key].Res_det.Res_pin;
         let resBadge = resData[key].Res_det.Res_badge;
         let resImage = resData[key].Res_det.Res_url;
-
-        console.log(resName)
-        console.log(resCardContainer)
         resCardContainer.innerHTML += `
         <div class="res-card" id="${resName}">
                 <img class="res-img" src="" alt="">
@@ -69,7 +68,6 @@ function createResCard(resData, availableRes) {
                     </div>
                 </div>`
         const resImageTag = document.querySelector(`#${resName} > .res-img`)
-        console.log(resImageTag)
         resImageTag.setAttribute('src', resImage)
     })
 }
