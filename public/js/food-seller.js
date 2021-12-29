@@ -135,7 +135,7 @@ function uploadResImg(storageRef, dbRef) {
 }
 
 function addResDet(dbRef, url) {
-    database.ref(`${dbRef}/Res-det`).set({
+    database.ref(`${dbRef}/Res_det`).set({
         Res_name: resName.value,
         Res_location: resLocation.value,
         Res_pin: resPincode.value,
@@ -146,7 +146,7 @@ function addResDet(dbRef, url) {
 }
 
 function getResData(dbRef) {
-    database.ref(`${dbRef}/Res-det`).on('value', snapshot => {
+    database.ref(`${dbRef}/Res_det`).on('value', snapshot => {
         const data = snapshot.val()
         updateResCard(data)
     })
