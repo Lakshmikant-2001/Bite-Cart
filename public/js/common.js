@@ -1,6 +1,3 @@
-import {firebaseConfig} from "./firebase-modules.js"
-firebase.initializeApp(firebaseConfig);
-
 const hamBtn =  document.querySelector('.ham-expand-div');
 const closeBtn = document.querySelector('.ham-contract-div');
 const  sideNav = document.querySelector('.side-navbar');
