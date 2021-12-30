@@ -57,11 +57,12 @@ function createCard(foodData, foodItems) {
             foodTypeImg = "./assets/non-veg-icon.png";
         }
         let foodName = foodData[key].Food_name;
+        let foodId = foodName.replace(/\s/g, '');
         let foodPrice = foodData[key].Food_price;
         let foodPhotoUrl = foodData[key].Food_photo_url;
 
         foodsCardWrapper.innerHTML += `
-        <div class="food-card" id= ${foodName}>
+        <div class="food-card" id= ${foodId}>
             <img src="" alt="" class="food-type-logo" >
             <img src="" alt="" class="food-image">
             <div class="card-footer">
@@ -74,9 +75,9 @@ function createCard(foodData, foodItems) {
                 </div>
             </div>
         </div>`
-        const foodTypeTag = document.querySelector(`#${foodName} > .food-type-logo`)
+        const foodTypeTag = foodsCardWrapper.querySelector(`#${foodId} > .food-type-logo`)
         foodTypeTag.setAttribute('src', foodTypeImg)
-        const foodImgTag = document.querySelector(`#${foodName} > .food-image`)
+        const foodImgTag = foodsCardWrapper.querySelector(`#${foodId} > .food-image`)
         foodImgTag.setAttribute('src', foodPhotoUrl)
     })
 }

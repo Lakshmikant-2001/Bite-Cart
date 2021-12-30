@@ -52,13 +52,14 @@ function createResCard(resData, availableRes) {
     removeLoadingAnimation()
     availableRes.forEach(key => {
         let resName = resData[key].Res_det.Res_name;
+        let resId = resName.replace(/\s/g, '')
         let resType = resData[key].Res_det.Res_type;
         let resLocation = resData[key].Res_det.Res_location;
         let resPincode = resData[key].Res_det.Res_pin;
         let resBadge = resData[key].Res_det.Res_badge;
         let resImage = resData[key].Res_det.Res_url;
         resCardContainer.innerHTML += `
-        <div class="res-card" id="${resName}" data-pincode = "${resPincode}">
+        <div class="res-card" id="${resId}" data-pincode = "${resPincode}">
                 <img class="res-img" src="" alt="">
                 <div class="rating-des-wrapper">
                     <div class="res-des">
@@ -70,10 +71,10 @@ function createResCard(resData, availableRes) {
                         <i class="fas fa-star"></i>
                     </div>
                 </div>`
-        const resImageTag = document.querySelector(`#${resName} > .res-img`)
+        const resImageTag = document.querySelector(`#${resId} > .res-img`)
         resImageTag.setAttribute('src', resImage)
     })
-    const allResCard = document.querySelectorAll(".res-card");
+    const allResCard = resCardContainer.querySelectorAll(".res-card");
     addEvent(allResCard)
 }
 
