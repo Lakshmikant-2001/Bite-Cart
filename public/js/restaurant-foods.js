@@ -1,6 +1,6 @@
+import { addLoadingAnimation,removeLoadingAnimation } from "./common.js";
 import { firebaseConfig } from "./firebase-modules.js"
 firebase.initializeApp(firebaseConfig);
-
 const database = firebase.database()
 
 const urlParams = new URLSearchParams(location.search);
@@ -10,6 +10,10 @@ for (const [key, value] of urlParams) {
 }
 
 
+window.addEventListener('load', () => {
+    addLoadingAnimation()
+})
+
 function resDatabase() {
     database.ref('Food-Seller').once('value').then(snapshot => {
         let resData = snapshot.val()
@@ -17,6 +21,9 @@ function resDatabase() {
         checkMatchingRes(resData, restaurants)
     }, {
         onlyOnce: true
+    }).catch(err  => {
+        console.log(err);
+        removeLoadingAnimation()
     })
 }
 
@@ -29,7 +36,13 @@ function checkMatchingRes(resData, restaurants) {
             matchedRes = resData[key]
         }
     })
-    createResCard(matchedRes)
+    if(matchedRes == null){
+        console.log("no matching res");
+        removeLoadingAnimation()
+    }
+    else{
+        createResCard(matchedRes)
+    }
 }
 
 function createResCard(matchedRes) {
@@ -43,10 +56,11 @@ function createResCard(matchedRes) {
     resType.textContent = resData.Res_type
     let foodData = matchedRes.Foods;
     let foodItems = Object.keys(foodData);
-    createCard(foodData, foodItems)
+    createFoodCard(foodData, foodItems)
 }
 
-function createCard(foodData, foodItems) {
+function createFoodCard(foodData, foodItems) {
+    removeLoadingAnimation()
     const foodsCardWrapper = document.querySelector("#food-cards-wrapper");
     foodItems.forEach((key) => {
         let foodTypeImg;

@@ -25,3 +25,26 @@ signOutBtn.addEventListener('click',()=>{
         console.error(error);
       });
 })
+
+const bodyContent = document.querySelectorAll("body *")
+const aside = document.querySelector("aside")
+const loadingIcon = document.querySelector("aside > img")
+
+
+export function addLoadingAnimation() {
+    bodyContent.forEach(element => {
+        element.style.display = "none"
+    })
+    aside.style.display = "unset"
+    loadingIcon.style.display = "unset"
+    loadingIcon.style.animation = " rotate 3s infinite linear";
+}
+
+export function removeLoadingAnimation() {
+    bodyContent.forEach(element => {
+        element.style.display = ""
+    })
+    aside.style.display = "none"
+    loadingIcon.style.display = "none"
+    loadingIcon.style.animation = "unset"
+}

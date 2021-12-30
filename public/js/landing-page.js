@@ -1,4 +1,6 @@
-import { firebaseConfig } from "./firebase-modules.js"
+import { firebaseConfig } from "./firebase-modules.js";
+import { addLoadingAnimation,removeLoadingAnimation } from "./common.js";
+
 firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database()
@@ -34,6 +36,10 @@ function getFoodSellers(pincode) {
         checkMatchingRes(resData, restaurants, pincode)
     }, {
         onlyOnce: true
+    }).catch(err => {
+        console.log(err);
+        // console.log("no res in db");
+        removeLoadingAnimation()
     })
 }
 
@@ -45,7 +51,13 @@ function checkMatchingRes(resData, restaurants, pincode) {
             availableRes.push(key)
         }
     })
-    createResCard(resData, availableRes)
+    if(availableRes == null){
+        removeLoadingAnimation()
+        console.log("no res available in your area!")
+    }
+    else{
+        createResCard(resData, availableRes)
+    }
 }
 
 function createResCard(resData, availableRes) {
@@ -53,10 +65,8 @@ function createResCard(resData, availableRes) {
     availableRes.forEach(key => {
         let resName = resData[key].Res_det.Res_name;
         let resId = resName.replace(/\s/g, '')
-        let resType = resData[key].Res_det.Res_type;
         let resLocation = resData[key].Res_det.Res_location;
         let resPincode = resData[key].Res_det.Res_pin;
-        let resBadge = resData[key].Res_det.Res_badge;
         let resImage = resData[key].Res_det.Res_url;
         resCardContainer.innerHTML += `
         <div class="res-card" id="${resId}" data-pincode = "${resPincode}">
@@ -78,29 +88,6 @@ function createResCard(resData, availableRes) {
     addEvent(allResCard)
 }
 
-const bodyContent = document.querySelectorAll("body *")
-const aside = document.querySelector("aside")
-const loadingIcon = document.querySelector("aside > img")
-
-
-function addLoadingAnimation() {
-    bodyContent.forEach(element => {
-        element.style.display = "none"
-    })
-    aside.style.display = "unset"
-    loadingIcon.style.display = "unset"
-    loadingIcon.style.animation = " rotate 3s infinite linear";
-}
-
-function removeLoadingAnimation() {
-    bodyContent.forEach(element => {
-        element.style.display = ""
-    })
-    aside.style.display = "none"
-    loadingIcon.style.display = "none"
-    loadingIcon.style.animation = "unset"
-}
-
 function addEvent(allResCard) {
     allResCard.forEach(card => {
         console.log(card.id)
@@ -110,3 +97,5 @@ function addEvent(allResCard) {
         })
     })
 }
+
+
