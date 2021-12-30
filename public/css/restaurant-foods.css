@@ -26,8 +26,7 @@ main{
 }
 
 /* ---restuarant header start--- */
-
-.resturant-header-wrapper{
+#restaurant-header-wrapper{
     padding:3rem 7rem;
     display:flex;
     flex-wrap:wrap;
@@ -99,7 +98,7 @@ main{
 
 /* ---Foods Card start---- */
 
-.food-cards-wrapper{
+#food-cards-wrapper{
     display: flex;
     flex-wrap: wrap;
     margin:2rem 0;
@@ -107,7 +106,7 @@ main{
 }
 
 .food-card{
-    min-width: 390px;
+    width: 390px;
     box-shadow:-2px 0 6px  #00000050,2px 0 6px  #00000050;
     font-size:1.5rem;
     color:#00000099;
@@ -171,6 +170,7 @@ main{
 
 .food-image{
     width: 100%;
+    height: 260px;
     border-bottom:4px solid #E45757;
     backdrop-filter: 10px;
 }
