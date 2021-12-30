@@ -9,7 +9,6 @@ for (const [key, value] of urlParams) {
     url.push(value)
 }
 
-
 window.addEventListener('load', () => {
     addLoadingAnimation()
 })
@@ -32,7 +31,8 @@ function checkMatchingRes(resData, restaurants) {
     restaurants.forEach((key) => {
         let pin = resData[key].Res_det.Res_pin;
         let name = resData[key].Res_det.Res_name;
-        if ((pin == url[1]) && (name == url[0])) {
+        let id = name.replace(/\s/g, '');
+        if ((pin == url[1]) && (id == url[0])) {
             matchedRes = resData[key]
         }
     })
@@ -47,6 +47,7 @@ function checkMatchingRes(resData, restaurants) {
 
 function createResCard(matchedRes) {
     let resData = matchedRes.Res_det;
+    console.log(resData)
     const header = document.querySelector("#restaurant-header-wrapper")
     const resName = header.querySelector(".res-name")
     const resLocation = header.querySelector(".res-location")
