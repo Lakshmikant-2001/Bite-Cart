@@ -30,7 +30,6 @@ function getUserPincode(user) {
 function getFoodSellers(pincode) {
     database.ref('Food-Seller').once('value').then(snapshot => {
         let resData = snapshot.val()
-        console.log(resData)
         const restaurants = Object.keys(resData)
         checkMatchingRes(resData, restaurants, pincode)
     }, {
@@ -59,12 +58,12 @@ function createResCard(resData, availableRes) {
         let resBadge = resData[key].Res_det.Res_badge;
         let resImage = resData[key].Res_det.Res_url;
         resCardContainer.innerHTML += `
-        <div class="res-card" id="${resName}">
+        <div class="res-card" id="${resName}" data-pincode = "${resPincode}">
                 <img class="res-img" src="" alt="">
                 <div class="rating-des-wrapper">
                     <div class="res-des">
                         <h3>${resName}</h3>
-                        <p>${resLocation}</p>
+                        <p>${resLocation} </p>
                     </div>
                     <div class="rating-div">
                         <p class="res-rating">4.1</p>
@@ -74,6 +73,8 @@ function createResCard(resData, availableRes) {
         const resImageTag = document.querySelector(`#${resName} > .res-img`)
         resImageTag.setAttribute('src', resImage)
     })
+    const allResCard = document.querySelectorAll(".res-card");
+    addEvent(allResCard)
 }
 
 const bodyContent = document.querySelectorAll("body *")
@@ -97,4 +98,14 @@ function removeLoadingAnimation() {
     aside.style.display = "none"
     loadingIcon.style.display = "none"
     loadingIcon.style.animation = "unset"
+}
+
+function addEvent(allResCard) {
+    allResCard.forEach(card => {
+        console.log(card.id)
+        const cardPincode = card.getAttribute("data-pincode")
+        card.addEventListener('click', () => {
+            window.location = `./restaurant-foods.html?res=${card.id}&pin=${cardPincode}`
+        })
+    })
 }
