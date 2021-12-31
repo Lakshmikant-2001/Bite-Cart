@@ -1,4 +1,4 @@
-import { addLoadingAnimation,removeLoadingAnimation } from "./common.js";
+import { addLoadingAnimation, removeLoadingAnimation } from "./common.js";
 import { firebaseConfig } from "./firebase-modules.js"
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database()
@@ -20,7 +20,7 @@ function resDatabase() {
         checkMatchingRes(resData, restaurants)
     }, {
         onlyOnce: true
-    }).catch(err  => {
+    }).catch(err => {
         console.log(err);
         removeLoadingAnimation()
     })
@@ -36,18 +36,17 @@ function checkMatchingRes(resData, restaurants) {
             matchedRes = resData[key]
         }
     })
-    if(matchedRes == null){
+    if (matchedRes == null) {
         console.log("no matching res");
         removeLoadingAnimation()
     }
-    else{
+    else {
         createResCard(matchedRes)
     }
 }
 
 function createResCard(matchedRes) {
     let resData = matchedRes.Res_det;
-    console.log(resData)
     const header = document.querySelector("#restaurant-header-wrapper")
     const resName = header.querySelector(".res-name")
     const resLocation = header.querySelector(".res-location")
@@ -59,10 +58,11 @@ function createResCard(matchedRes) {
     let foodItems = Object.keys(foodData);
     createFoodCard(foodData, foodItems)
 }
+const foodsCardWrapper = document.querySelector("#food-cards-wrapper");
+
 
 function createFoodCard(foodData, foodItems) {
     removeLoadingAnimation()
-    const foodsCardWrapper = document.querySelector("#food-cards-wrapper");
     foodItems.forEach((key) => {
         let foodTypeImg;
         if (foodData[key].Food_type == "veg") {
@@ -86,7 +86,9 @@ function createFoodCard(foodData, foodItems) {
                     <p class="food-price">$${foodPrice}</p>
                 </div>
                 <div class="add-btn">
-                    <p>Add +</p>
+                    <button class="dec-input"> - </button>
+                    <input type="number" placeholder="Add +" min="1" max="10" readonly>
+                    <button class="inc-input"> + </button>
                 </div>
             </div>
         </div>`
@@ -95,6 +97,42 @@ function createFoodCard(foodData, foodItems) {
         const foodImgTag = foodsCardWrapper.querySelector(`#${foodId} > .food-image`)
         foodImgTag.setAttribute('src', foodPhotoUrl)
     })
+    addItemListeners()
 }
 
 resDatabase()
+
+function addItemListeners() {
+    const incOperator = document.querySelectorAll('.inc-input');
+    const decOperator = document.querySelectorAll('.dec-input');
+
+    incOperator.forEach((inc) => {
+        inc.addEventListener("click", (e) => {
+            incrementInput(e)
+        })
+    })
+
+    decOperator.forEach(dec => {
+        dec.addEventListener("click", (e) => {
+            decrementInput(e)
+        })
+    })
+}
+
+function incrementInput(e) {
+    const triggeredParent = e.target.parentElement.parentElement;
+    const input = triggeredParent.querySelector("input");
+    const val = Number(input.value);
+    if ((val >= 0) && (val < 10)) {
+        input.value = val + 1;
+    }
+}
+
+function decrementInput(e) {
+    const triggeredParent = e.target.parentElement.parentElement;
+    const input = triggeredParent.querySelector("input");
+    const val = Number(input.value);
+    if (val > 0) {
+        input.value = val - 1;
+    }
+}
