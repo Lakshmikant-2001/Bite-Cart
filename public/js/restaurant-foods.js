@@ -108,19 +108,22 @@ function addItemListeners() {
 
     incOperator.forEach((inc) => {
         inc.addEventListener("click", (e) => {
-            incrementInput(e)
+            const triggeredParent = e.target.parentNode.parentNode.parentNode;
+            incrementInput(triggeredParent)
+            addItem(triggeredParent)
         })
     })
 
     decOperator.forEach(dec => {
         dec.addEventListener("click", (e) => {
-            decrementInput(e)
+            const triggeredParent = e.target.parentNode.parentNode.parentNode;
+            decrementInput(triggeredParent)
+            addItem(triggeredParent)
         })
     })
 }
 
-function incrementInput(e) {
-    const triggeredParent = e.target.parentElement.parentElement;
+function incrementInput(triggeredParent) {
     const input = triggeredParent.querySelector("input");
     const val = Number(input.value);
     if ((val >= 0) && (val < 10)) {
@@ -128,11 +131,24 @@ function incrementInput(e) {
     }
 }
 
-function decrementInput(e) {
-    const triggeredParent = e.target.parentElement.parentElement;
+function decrementInput(triggeredParent) {
     const input = triggeredParent.querySelector("input");
     const val = Number(input.value);
     if (val > 0) {
         input.value = val - 1;
     }
+}
+
+function addItem(foodCard) {
+    const input = foodCard.querySelector("input");
+    const addedFood = foodCard.getAttribute('id');
+    const val = Number(input.value);
+    addToCart(addedFood, val)
+}
+
+let cartItems = {};
+
+function addToCart(food, qty) {
+    cartItems[food] = qty;
+    console.log(cartItems)
 }
