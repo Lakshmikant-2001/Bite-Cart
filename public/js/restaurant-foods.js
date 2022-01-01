@@ -37,7 +37,7 @@ function checkMatchingRes(resData, restaurants) {
         }
     })
     if (matchedRes == null) {
-        console.log("no matching res");
+    console.log("no matching res");
         removeLoadingAnimation()
     }
     else {
@@ -173,6 +173,9 @@ function createProceedToBuy(cartItems, totalItems, totalPrice) {
     const priceTag = prcdToBuyBtn.querySelector('#price > span')
     itemQtyTag.textContent = totalItems;
     priceTag.textContent = totalPrice;
+    if(totalItems == 0){
+        prcdToBuyBtn.style.display="none"
+    }
     prcdToBuyBtn.addEventListener('click',()=>{
         window.location = `./cart.html?res=${url[0]}cart=${cartItems}&items=${totalItems}&price=${totalPrice}`;
     })
