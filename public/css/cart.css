@@ -9,6 +9,10 @@
 body {
     font-family: 'Questrial', sans-serif;
     color: black;
+    font-size: 1.3rem;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 }
 
 body a {
@@ -20,7 +24,53 @@ body h2, h4 {
     font-weight: unset;
 }
 
-main {
-    margin-left: 320px;
-    /* transition: transform .5s ease-in-out; */
+input[type="number"] {
+    border: unset;
+    font-size: inherit;
 }
+
+input[type="number"]:focus{
+    outline:none;
+}
+
+main {
+    padding: 3rem;
+    height: 90%;
+    margin: 0 1.5rem 0 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+#cart-title {
+    font-family: 'Passion One', cursive;
+    font-size: 3.5rem;
+    font-weight: lighter;
+    color: #E45757;
+    text-transform: uppercase;
+    text-shadow: 0px 2px 3px #00000080;
+}
+
+.cart-wrapper {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.cart-left-div {
+    margin-right: 3rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#cart-items-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.res-det {}
+
+#cart-items-wrapper {}

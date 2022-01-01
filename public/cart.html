@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="./css/util.css">
     <title>Bite-Cart - Cart</title>
 </head>
+
 <body>
     <header class="side-navbar">
         <div class="side-nav-title-div" title="contract">
@@ -31,7 +33,51 @@
     <div class="ham-expand-div" title="expand">
         <span></span><span></span><span></span>
     </div>
-    <main class="main"></main>
+    <main class="main">
+        <h1 id="cart-title">My cart</h1>
+        <div class="cart-wrapper">
+            <div class="cart-left-div">
+                <div class="res-det">
+                    <p>Order from:</p>
+                    <p id="res-name">Paapu Restaurant</p>
+                    <p id="res-location">Saravanamapatti</p>
+                    <p id="res-pincode">641035</p>
+                </div>
+                <div id="cart-items-wrapper">
+                    <div class="ind-cart-items">
+                        <img src="./assets/restaurant-1.png" alt="">
+                        <p class="item-no">1</p>
+                        <p class="item-name">Chicken curry</p>
+                        <p>Qty: <input type="number" value="2" readonly></p>
+                        <p class="item-price">price:10$</p>
+                        <p class="item-amount">2$</p>
+                    </div>
+                    <div class="ind-cart-items">
+                        <img src="./assets/restaurant-1.png" alt="">
+                        <p class="item-no">1</p>
+                        <p class="item-name">Chicken curry</p>
+                        <p>Qty: <input type="number" value="2" readonly></p>
+                        <p class="item-price">price:10$</p>
+                        <p class="item-amount">2$</p>
+                    </div>
+                    <div class="ind-cart-items">
+                        <img src="./assets/restaurant-1.png" alt="">
+                        <p class="item-no">1</p>
+                        <p class="item-name">Chicken curry</p>
+                        <p>Qty: <input type="number" value="2" readonly></p>
+                        <p class="item-price">price:10$</p>
+                        <p class="item-amount">2$</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-right-div">
+                <p>Total Price: 120$</p>
+                <p>Discount: 10%</p>
+                <p>Final Price: 108$</p>
+                <button>Place Order</button>
+            </div>
+        </div>
+    </main>
     <script src="./js/cart.js" type="module"></script>
     <script src="./js/common.js" type="module"></script>
     <!-- firebase scripts -->
@@ -40,4 +86,5 @@
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
     <!-- firebase scripts -->
 </body>
+
 </html>
