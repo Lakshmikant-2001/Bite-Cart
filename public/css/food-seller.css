@@ -20,6 +20,17 @@ input:focus {
     outline: none;
 }
 
+.fas{
+    margin:1rem;
+    position: absolute;
+    top:0%;
+    left:0%;
+    transform: scale(4) translate(50%,50%);
+    color:black;
+    z-index: 1;
+    cursor:pointer;
+}
+
 #res-cover-photo {
     position: absolute;
     margin: 0;
@@ -28,6 +39,7 @@ input:focus {
     transform: translateY(-59%);
     -webkit-user-drag: none;
     border-bottom: 5px solid #fa5953;
+    z-index: -1;
 }
 
 #res-card-section {

@@ -6,9 +6,9 @@ const auth = firebase.auth()
 const storage = firebase.storage()
 
 //Query Selectors -  all Form Fields
-const main = document.querySelector('main')
-const coverPhoto = document.querySelector('#res-cover-photo')
-const loadingIcon = document.querySelector('aside > img')
+const bodyContent = document.querySelectorAll("body *")
+const aside = document.querySelector("#loading-aside")
+const loadingIcon = aside.querySelector("img")
 const resName = document.querySelector('#res-name')
 const resType = document.querySelector('#res-type')
 const resLocation = document.querySelector('#res-location')
@@ -29,6 +29,7 @@ const foodTotalQty = document.querySelector('#food-total-quantity')
 const foodImage = document.querySelector('#food-img')
 const addFoodBtn = document.querySelector('#add-food-btn')
 const formErrorElement = document.querySelector('#form-error-message')
+const signOutBtn = document.querySelector('#sign-out-btn');
 let foodType;
 
 foodImage.addEventListener('change', () => {
@@ -51,26 +52,34 @@ auth.onAuthStateChanged((user) => {
             changeToEditState()
         })
         addResBtn.addEventListener("click", () => {
-            verifyValidation(resInputs,storageRef,dbRef,uploadResImg)
+            verifyValidation(resInputs, storageRef, dbRef, uploadResImg)
         })
         addFoodBtn.addEventListener("click", () => {
             resetFoodDiv()
-            verifyValidation(foodInputs,storageRef,dbRef,uploadFoodImg)
+            verifyValidation(foodInputs, storageRef, dbRef, uploadFoodImg)
+        })
+        signOutBtn.addEventListener('click', () => {
+            firebase.auth().signOut().then(() => {
+                window.location = "./index.html"
+            }).catch((eror) => {
+                console.log(error);
+            });
         })
     }
+
     else {
         window.location = "./index.html"
     }
 });
 
-function verifyValidation(inputs,storageRef,dbRef,func){
+function verifyValidation(inputs, storageRef, dbRef, func) {
     let result = validateForm(inputs)
     console.log(result)
     if (result == false) {
-        formErrorElement.style.display="unset"
-        setTimeout(()=>{
-        formErrorElement.style.display="none"
-        },2000)
+        formErrorElement.style.display = "unset"
+        setTimeout(() => {
+            formErrorElement.style.display = "none"
+        }, 2000)
     }
     else {
         addLoadingAnimation()
@@ -81,11 +90,11 @@ function verifyValidation(inputs,storageRef,dbRef,func){
 function validateForm(inputs) {
     console.log("call")
     let flag = true;
-     inputs.forEach(input => {
+    inputs.forEach(input => {
         let checkValid = input.checkValidity()
         console.log(checkValid)
         if (!checkValid) {
-             flag = false;
+            flag = false;
         }
     })
     return flag;
@@ -198,21 +207,25 @@ function uploadFoodImg(storageRef, dbRef) {
 
 //Loading animation during storage upload
 function loadingPerCheck(progress) {
-    if(progress == 100) {
+    if (progress == 100) {
         removeLoadingAnimation()
     }
 }
 
 function addLoadingAnimation() {
-    main.style.display = "none"
-    coverPhoto.style.display = "none"
+    bodyContent.forEach(element => {
+        element.style.display = "none"
+    })
+    aside.style.display = "unset"
     loadingIcon.style.display = "unset"
     loadingIcon.style.animation = " rotate 3s infinite linear";
 }
 
 function removeLoadingAnimation() {
-    main.style.display = "unset"
-    coverPhoto.style.display = "unset"
+    bodyContent.forEach(element => {
+        element.style.display = ""
+    })
+    aside.style.display = "none"
     loadingIcon.style.display = "none"
     loadingIcon.style.animation = "unset"
 }
