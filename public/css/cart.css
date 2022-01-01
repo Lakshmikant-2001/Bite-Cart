@@ -1,0 +1,26 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Questrial', sans-serif;
+    color: black;
+}
+
+body a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body h2, h4 {
+    font-weight: unset;
+}
+
+main {
+    margin-left: 320px;
+    /* transition: transform .5s ease-in-out; */
+}

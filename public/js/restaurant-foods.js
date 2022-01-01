@@ -173,5 +173,7 @@ function createProceedToBuy(cartItems, totalItems, totalPrice) {
     const priceTag = prcdToBuyBtn.querySelector('#price > span')
     itemQtyTag.textContent = totalItems;
     priceTag.textContent = totalPrice;
-
+    prcdToBuyBtn.addEventListener('click',()=>{
+        window.location = `./cart.html?res=${url[0]}cart=${cartItems}&items=${totalItems}&price=${totalPrice}`;
+    })
 }
