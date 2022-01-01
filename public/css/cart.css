@@ -26,7 +26,8 @@ body h2, h4 {
 
 input[type="number"] {
     border: unset;
-    font-size: inherit;
+    font: inherit;
+    color:inherit;
 }
 
 input[type="number"]:focus{
@@ -39,10 +40,12 @@ main {
     margin: 0 1.5rem 0 350px;
     display: flex;
     flex-direction: column;
+    font-family: 'Passion One', cursive;
+    color: #867B7B;
+    font-size: 1.8rem;
 }
 
 #cart-title {
-    font-family: 'Passion One', cursive;
     font-size: 3.5rem;
     font-weight: lighter;
     color: #E45757;
@@ -59,7 +62,7 @@ main {
 }
 
 .cart-left-div {
-    margin-right: 3rem;
+    margin-right: 10rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -68,9 +71,75 @@ main {
 #cart-items-wrapper {
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
-.res-det {}
+.res-det {
+    display:flex;
+    align-items: center;
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+    font-size:2.2rem;
+}
 
-#cart-items-wrapper {}
+.res-det > :first-child{
+    color:#E45757;
+    margin-right: 2rem;
+}
+
+.res-det >  :last-child{
+    flex-grow: 1;
+    display:flex;
+    flex-direction: column;
+}
+
+.res-det >  :last-child > div{
+    display: flex;
+}
+
+
+#cart-items-wrapper{
+    display:flex;
+    flex-direction: column;
+    box-shadow:4px 5px 13px #00000020,-2px -3px 9px #00000020;
+}
+
+.ind-cart-items{
+    text-transform: uppercase;
+    border-bottom: 1px solid #00000030;
+    display: flex;
+    position: relative;
+}
+
+.item-img{
+    width: 30%;
+    margin-right: 4rem;
+}
+
+.ind-cart-items > div{
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 0;
+    line-height: 4rem;
+}
+
+.item-no{
+    position: absolute;
+    top:0;
+    right:0;
+    background-color: tomato;
+    color:#fff;
+    font-size: 2.3rem;
+    padding:.3rem 1.7rem;
+    border-radius: 0 0 0 1rem;
+}
+
+.item-amount{
+    align-self: flex-end;
+    margin:0 5rem 3rem auto;
+    padding:.3rem .5rem;
+    border-radius: .5rem;
+    border-right: 5px solid #867B7B;
+    border-left: 5px solid #867B7B;
+}
+
