@@ -286,7 +286,7 @@ aside img {
 }
 
 footer{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
     color:#fff;
@@ -298,6 +298,7 @@ footer{
     border-radius: .5rem;
     cursor: pointer;
     transition: box-shadow .3s ease;
+    display: none;
 }
 
 footer:hover{

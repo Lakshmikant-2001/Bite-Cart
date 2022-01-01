@@ -141,14 +141,37 @@ function decrementInput(triggeredParent) {
 
 function addItem(foodCard) {
     const input = foodCard.querySelector("input");
+    const price = foodCard.querySelector(".food-price").textContent
+    console.log(price)
     const addedFood = foodCard.getAttribute('id');
     const val = Number(input.value);
-    addToCart(addedFood, val)
+    addToCart(addedFood, val, price)
 }
 
 let cartItems = {};
 
-function addToCart(food, qty) {
-    cartItems[food] = qty;
+function addToCart(food, qty, price) {
+    cartItems[food] = qty + price;
     console.log(cartItems)
+    const noOfFoods = Object.keys(cartItems).length;
+    const qtyPricePair = Object.values(cartItems)
+    let totalPrice = 0;
+    let totalItems = 0;
+    qtyPricePair.forEach(pair => {
+        const split = pair.split("$");
+        totalItems += Number(split[0]);
+        totalPrice += split[0] * split[1];
+    })
+    createProceedToBuy(cartItems, totalItems, totalPrice)
+}
+
+function createProceedToBuy(cartItems, totalItems, totalPrice) {
+    const prcdToBuyBtn = document.querySelector('#proceed-to-buy');
+    prcdToBuyBtn.style.display = "flex";
+    const itemQtyTag = prcdToBuyBtn.querySelector('#items > span')
+    console.log(itemQtyTag)
+    const priceTag = prcdToBuyBtn.querySelector('#price > span')
+    itemQtyTag.textContent = totalItems;
+    priceTag.textContent = totalPrice;
+
 }
