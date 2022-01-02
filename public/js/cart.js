@@ -53,6 +53,7 @@ function createCartItem(foodDetails, foodItems) {
     const foodQtyPair = JSON.parse(url.cart)
     const foods = Object.keys(foodQtyPair);
     let foodNo = 0;
+    let totalPrice = 0
     foods.forEach(food => {
         foodNo ++;
         const foodKey = food;
@@ -61,6 +62,7 @@ function createCartItem(foodDetails, foodItems) {
         const url = modFoodDet[foodKey].Food_photo_url;
         const price = modFoodDet[foodKey].Food_price;
         const amount = price * qty;
+        totalPrice+=amount;
         cartItemsWrapper.innerHTML += `
         <div class="ind-cart-items" id="${foodKey}">
             <img src="./assets/food-img-1.jpg" alt="" class="item-img">
@@ -75,4 +77,16 @@ function createCartItem(foodDetails, foodItems) {
         const foodImgTag = document.querySelector(`#${foodKey} > .item-img`);
         foodImgTag.setAttribute('src', url);
     })
+    updateBill(totalPrice)
+}
+
+function updateBill(totalPrice){
+    const placeOrderDiv = document.querySelector("#place-order-div");
+    const totalPriceTag = placeOrderDiv.querySelector("#total-price");
+    const discountInput = placeOrderDiv.querySelector("#discount > input");
+    const finalPriceTag = placeOrderDiv.querySelector("#final-price");
+    totalPriceTag.textContent+=totalPrice+"$";
+    let finalPrice  = totalPrice - (totalPrice * (discountInput.value / 100));
+    finalPriceTag.textContent+=finalPrice+"$"
+    
 }

@@ -62,7 +62,7 @@ main {
 }
 
 .cart-left-div {
-    margin-right: 10rem;
+    margin-right: 3rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -163,6 +163,11 @@ main {
 
 .cart-right-div > *{
     margin:1rem 0;
+    white-space: nowrap;
+}
+
+#discount input{
+   width: 40px;
 }
 
 .btn {
