@@ -74,7 +74,7 @@ main {
     overflow-y: hidden;
 }
 
-.res-det {
+#res-det {
     display: flex;
     align-items: center;
     text-transform: uppercase;
@@ -82,18 +82,18 @@ main {
     font-size: 2.2rem;
 }
 
-.res-det> :first-child {
+#res-det> :first-child {
     color: #E45757;
     margin-right: 2rem;
 }
 
-.res-det> :last-child {
+#res-det> :last-child {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
-.res-det> :last-child>div {
+#res-det> :last-child>div {
     display: flex;
 }
 

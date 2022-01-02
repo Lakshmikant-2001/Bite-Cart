@@ -26,14 +26,17 @@ function resDatabase() {
     })
 }
 
+let matchedRes = {};
+let matchedResKey;
+
 function checkMatchingRes(resData, restaurants) {
-    let matchedRes = {};
     restaurants.forEach((key) => {
         let pin = resData[key].Res_det.Res_pin;
         let name = resData[key].Res_det.Res_name;
         let id = name.replace(/\s/g, '');
         if ((pin == url[1]) && (id == url[0])) {
             matchedRes = resData[key]
+            matchedResKey = key
         }
     })
     if (matchedRes == null) {
@@ -149,11 +152,11 @@ function addItem(foodCard) {
 }
 
 let cartItems = {};
+let foodQtyPair = {};
 
 function addToCart(food, qty, price) {
+    foodQtyPair[food] = qty;
     cartItems[food] = qty + price;
-    console.log(cartItems)
-    const noOfFoods = Object.keys(cartItems).length;
     const qtyPricePair = Object.values(cartItems)
     let totalPrice = 0;
     let totalItems = 0;
@@ -162,10 +165,10 @@ function addToCart(food, qty, price) {
         totalItems += Number(split[0]);
         totalPrice += split[0] * split[1];
     })
-    createProceedToBuy(cartItems, totalItems, totalPrice)
+    createProceedToBuy(foodQtyPair, totalItems, totalPrice)
 }
 
-function createProceedToBuy(cartItems, totalItems, totalPrice) {
+function createProceedToBuy(foodQtyPair, totalItems, totalPrice) {
     const prcdToBuyBtn = document.querySelector('#proceed-to-buy');
     prcdToBuyBtn.style.display = "flex";
     const itemQtyTag = prcdToBuyBtn.querySelector('#items > span')
@@ -173,10 +176,11 @@ function createProceedToBuy(cartItems, totalItems, totalPrice) {
     const priceTag = prcdToBuyBtn.querySelector('#price > span')
     itemQtyTag.textContent = totalItems;
     priceTag.textContent = totalPrice;
+    foodQtyPair=(JSON.stringify(foodQtyPair))
     if(totalItems == 0){
         prcdToBuyBtn.style.display="none"
     }
     prcdToBuyBtn.addEventListener('click',()=>{
-        window.location = `./cart.html?res=${url[0]}cart=${cartItems}&items=${totalItems}&price=${totalPrice}`;
+        window.location = `./cart.html?res=${matchedResKey}&cart=${foodQtyPair}&items=${totalItems}&price=${totalPrice}`;
     })
 }
