@@ -95,4 +95,22 @@ function updateBill(totalPrice) {
     totalPriceTag.textContent += totalPrice + "$";
     let finalPrice = totalPrice - (totalPrice * (discountInput.value / 100));
     finalPriceTag.textContent += finalPrice + "$";
+    const placeOrderBtn = placeOrderDiv.querySelector("#place-order-btn");
+    placeOrderBtn.addEventListener('click', () => {
+        addLoadingAnimation()
+        setInterval(() => {
+            removeLoadingAnimation();
+            placeOrder()
+        }, 2000)
+    })
+}
+
+function placeOrder() {
+    const body = document.querySelector('body');
+    body.style.pointerEvents = "none"
+    const message = document.createElement('p');
+    body.appendChild(message);
+    message.setAttribute('id', "order-message");
+    message.textContent = "Order placed Successfully!";
+    removeLoadingAnimation()
 }

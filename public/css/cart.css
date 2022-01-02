@@ -191,3 +191,16 @@ main {
 #place-order-btn{
     padding: .6rem 1.5rem;
 }
+
+#order-message{
+    font-family: 'Passion One', cursive;
+    font-size: 2.5rem;
+    font-weight: lighter;
+    color: #E45757;
+    text-transform: uppercase;
+    text-shadow: 0px 2px 1px #00000030;
+    position: absolute;
+    top:0;
+    right: 0;
+    margin:2rem;
+}
