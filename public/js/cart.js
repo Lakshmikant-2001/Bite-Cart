@@ -12,7 +12,12 @@ for (const [key, value] of urlParams) {
     url[key] = value;
 }
 
-getResData()
+
+window.addEventListener('load', () => {
+    addLoadingAnimation();
+    getResData()
+})
+
 
 function getResData() {
     database.ref(`Food-Seller/${url.res}`).once('value').then(snapshot => {
@@ -22,6 +27,7 @@ function getResData() {
         onlyOnce: true
     }).catch(err => {
         console.log(err);
+        removeLoadingAnimation()
     })
 }
 
@@ -38,7 +44,8 @@ function addResDet(resData) {
     resLocationTag.textContent = resDetails.Res_location + ",";
     resPincodeTag.textContent = resDetails.Res_pin;
 
-    createCartItem(foodDetails, foodItems)
+    createCartItem(foodDetails, foodItems);
+    removeLoadingAnimation();
 }
 
 let modFoodDet = {}
@@ -55,14 +62,14 @@ function createCartItem(foodDetails, foodItems) {
     let foodNo = 0;
     let totalPrice = 0
     foods.forEach(food => {
-        foodNo ++;
+        foodNo++;
         const foodKey = food;
         const qty = foodQtyPair[foodKey];
         const name = modFoodDet[foodKey].Food_name;
         const url = modFoodDet[foodKey].Food_photo_url;
         const price = modFoodDet[foodKey].Food_price;
         const amount = price * qty;
-        totalPrice+=amount;
+        totalPrice += amount;
         cartItemsWrapper.innerHTML += `
         <div class="ind-cart-items" id="${foodKey}">
             <img src="./assets/food-img-1.jpg" alt="" class="item-img">
@@ -80,13 +87,12 @@ function createCartItem(foodDetails, foodItems) {
     updateBill(totalPrice)
 }
 
-function updateBill(totalPrice){
+function updateBill(totalPrice) {
     const placeOrderDiv = document.querySelector("#place-order-div");
     const totalPriceTag = placeOrderDiv.querySelector("#total-price");
     const discountInput = placeOrderDiv.querySelector("#discount > input");
     const finalPriceTag = placeOrderDiv.querySelector("#final-price");
-    totalPriceTag.textContent+=totalPrice+"$";
-    let finalPrice  = totalPrice - (totalPrice * (discountInput.value / 100));
-    finalPriceTag.textContent+=finalPrice+"$"
-    
+    totalPriceTag.textContent += totalPrice + "$";
+    let finalPrice = totalPrice - (totalPrice * (discountInput.value / 100));
+    finalPriceTag.textContent += finalPrice + "$";
 }

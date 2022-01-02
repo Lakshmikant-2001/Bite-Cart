@@ -97,27 +97,3 @@ main{
    margin-left:.2rem;
 }
 /* ---restauarnt cards end ---- */
-
-aside img {
-    display: none;
-    width: 150px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-}
-
-@keyframes rotate {
-    0% {
-        transform: translate(-50%, -50%) rotate(0turn);
-    }
-
-    50% {
-        transform: translate(-50%, -50%) rotate(.5turn);
-    }
-
-    100% {
-        transform: translate(-50%, -50%) rotate(1turn);
-    }
-}

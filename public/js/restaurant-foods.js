@@ -11,9 +11,10 @@ for (const [key, value] of urlParams) {
 
 window.addEventListener('load', () => {
     addLoadingAnimation()
+    checkResDatabase()
 })
 
-function resDatabase() {
+function checkResDatabase() {
     database.ref('Food-Seller').once('value').then(snapshot => {
         let resData = snapshot.val()
         const restaurants = Object.keys(resData)
@@ -103,7 +104,7 @@ function createFoodCard(foodData, foodItems) {
     addItemListeners()
 }
 
-resDatabase()
+
 
 function addItemListeners() {
     const incOperator = document.querySelectorAll('.inc-input');
