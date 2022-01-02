@@ -84,9 +84,16 @@ function verifyValidation(inputs, storageRef, dbRef, func) {
     else {
         addLoadingAnimation()
         func(storageRef, dbRef)
+        clearFoodFormInputs()
     }
 }
 
+function clearFoodFormInputs(){
+    foodInputs.forEach((input) => {
+        input.value = "";
+    });
+    foodFileName.textContent="";
+}
 function validateForm(inputs) {
     console.log("call")
     let flag = true;
@@ -105,6 +112,10 @@ function changeToEditState() {
     editResBtn.style.display = "none";
     addResBtn.style.display = "unset";
     resImgFile.removeAttribute('disabled');
+    resImg.classList.add('img');
+    console.log(resImgFile.classList);
+    const resInput = document.querySelector('#res-form input');
+    resInput.focus()
     resInputs.forEach(input => {
         input.style.pointerEvents = "unset"
         input.style.borderBottom = "2px dotted #ffffff"
@@ -185,6 +196,7 @@ function addFoodDet(dbRef, url) {
         Food_total_qty: foodTotalQty.value,
         Food_photo_url: url
     })
+
 }
 
 //Upload Food Image in storage

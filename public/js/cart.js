@@ -98,7 +98,7 @@ function updateBill(totalPrice) {
     const placeOrderBtn = placeOrderDiv.querySelector("#place-order-btn");
     placeOrderBtn.addEventListener('click', () => {
         addLoadingAnimation()
-        setInterval(() => {
+        setTimeout(() => {
             removeLoadingAnimation();
             placeOrder()
         }, 2000)
@@ -107,7 +107,8 @@ function updateBill(totalPrice) {
 
 function placeOrder() {
     const body = document.querySelector('body');
-    body.style.pointerEvents = "none"
+    const main = document.querySelector('main')
+    main.style.pointerEvents = "none"
     const message = document.createElement('p');
     body.appendChild(message);
     message.setAttribute('id', "order-message");

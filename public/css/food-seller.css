@@ -88,6 +88,10 @@ input:focus {
     pointer-events: none;
 }
 
+#res-form input:focus{
+    border-bottom: 2px dotted #f17171 !important;
+}
+
 #res-name {
     color: #fa5953;
     font-size: 4.2rem;
@@ -128,10 +132,6 @@ input:focus {
     flex-direction: column;
 }
 
-#res-det-div-right input {
-    /* display: none; */
-}
-
 #res-img {
     width: 300px;
     height: 300px;
@@ -139,6 +139,11 @@ input:focus {
     border: 7px solid #fff;
     user-select: none;
 }
+
+.img:hover{
+    border: 7px solid #f17171 !important;
+}
+
 
 #res-img-file {
     display: none;
