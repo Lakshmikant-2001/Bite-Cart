@@ -74,17 +74,12 @@ auth.onAuthStateChanged((user) => {
 
 function verifyValidation(inputs, storageRef, dbRef, func) {
     let result = validateForm(inputs)
-    console.log(result)
     if (result == false) {
         formErrorElement.style.display = "unset"
-        setTimeout(() => {
-            formErrorElement.style.display = "none"
-        }, 2000)
     }
     else {
         addLoadingAnimation()
         func(storageRef, dbRef)
-        clearFoodFormInputs()
     }
 }
 
@@ -94,12 +89,12 @@ function clearFoodFormInputs(){
     });
     foodFileName.textContent="";
 }
+
 function validateForm(inputs) {
     console.log("call")
     let flag = true;
     inputs.forEach(input => {
         let checkValid = input.checkValidity()
-        console.log(checkValid)
         if (!checkValid) {
             flag = false;
         }
@@ -153,7 +148,6 @@ function uploadResImg(storageRef, dbRef) {
         })
     })
 }
-
 function addResDet(dbRef, url) {
     database.ref(`${dbRef}/Res_det`).set({
         Res_name: resName.value,
@@ -168,7 +162,7 @@ function addResDet(dbRef, url) {
 function getResData(dbRef) {
     database.ref(`${dbRef}/Res_det`).on('value', snapshot => {
         const data = snapshot.val()
-        updateResCard(data)
+        updateResCard(data);
     })
 }
 
@@ -181,23 +175,6 @@ function updateResCard(data) {
     resImg.setAttribute('src', data.Res_url)
 }
 
-//Add Food Details in DB
-function addFoodDet(dbRef, url) {
-    if (vegType.checked) {
-        foodType = "veg";
-    }
-    else {
-        foodType = "non-veg";
-    }
-    database.ref(`${dbRef}/Foods/${foodName.value}`).set({
-        Food_name: foodName.value,
-        Food_type: foodType,
-        Food_price: foodPrice.value,
-        Food_total_qty: foodTotalQty.value,
-        Food_photo_url: url
-    })
-
-}
 
 //Upload Food Image in storage
 function uploadFoodImg(storageRef, dbRef) {
@@ -206,7 +183,7 @@ function uploadFoodImg(storageRef, dbRef) {
     uploadFoodImage.on('state_changed', snapshot => {
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setTimeout(() => {
-            loadingPerCheck(progress)
+            loadingPerCheck(progress);
         }, 1000)
     }, err => {
         console.log(err);
@@ -217,35 +194,23 @@ function uploadFoodImg(storageRef, dbRef) {
     })
 }
 
-//Loading animation during storage upload
-function loadingPerCheck(progress) {
-    if (progress == 100) {
-        removeLoadingAnimation()
+//Add Food Details in DB
+function addFoodDet(dbRef, url) {
+    console.log("call")
+    if (vegType.checked) {
+        foodType = "veg";
     }
-}
-
-function addLoadingAnimation() {
-    bodyContent.forEach(element => {
-        element.style.display = "none"
-    })
-    aside.style.display = "unset"
-    loadingIcon.style.display = "unset"
-    loadingIcon.style.animation = " rotate 3s infinite linear";
-}
-
-function removeLoadingAnimation() {
-    bodyContent.forEach(element => {
-        element.style.display = ""
-    })
-    aside.style.display = "none"
-    loadingIcon.style.display = "none"
-    loadingIcon.style.animation = "unset"
-}
-
-//Reset Food Cardsd
-function resetFoodDiv() {
-    const foodCardSection = document.querySelector('#food-cards-container')
-    foodCardSection.innerHTML = ''
+    else {
+        foodType = "non-veg";
+    }
+    console.log(foodName.value)
+    database.ref(`${dbRef}/Foods/${foodName.value}`).set({
+        Food_name: foodName.value,
+        Food_type: foodType,
+        Food_price: foodPrice.value,
+        Food_total_qty: foodTotalQty.value,
+        Food_photo_url: url
+    });
 }
 
 // Get Food Item Data
@@ -253,7 +218,8 @@ function getFoodData(dbRef) {
     database.ref(dbRef).on('value', snapshot => {
         const data = snapshot.val().Foods
         let foodItems = Object.keys(data);
-        createCard(data, foodItems)
+        createCard(data, foodItems);
+        clearFoodFormInputs()
     })
 }
 
@@ -269,6 +235,7 @@ function createCard(foodData, foodItems) {
             foodTypeImg = "./assets/non-veg-icon.png";
         }
         let foodName = foodData[key].Food_name;
+        console.log(foodName)
         let foodId = foodName.replace(/\s/g, '');
         console.log(foodId)
         let foodPrice = foodData[key].Food_price;
@@ -294,4 +261,35 @@ function createCard(foodData, foodItems) {
         const foodImgTag = foodCardSection.querySelector(`#${foodId} > .food-image`)
         foodImgTag.setAttribute('src', foodPhotoUrl)
     })
+}
+
+//Reset Food Cardsd
+function resetFoodDiv() {
+    const foodCardSection = document.querySelector('#food-cards-container')
+    foodCardSection.innerHTML = ''
+}
+
+//Loading animation during storage upload
+function loadingPerCheck(progress) {
+    if (progress == 100) {
+        removeLoadingAnimation()
+    }
+}
+
+function addLoadingAnimation() {
+    bodyContent.forEach(element => {
+        element.style.display = "none"
+    })
+    aside.style.display = "unset"
+    loadingIcon.style.display = "unset"
+    loadingIcon.style.animation = " rotate 3s infinite linear";
+}
+
+function removeLoadingAnimation() {
+    bodyContent.forEach(element => {
+        element.style.display = ""
+    })
+    aside.style.display = "none"
+    loadingIcon.style.display = "none"
+    loadingIcon.style.animation = "unset"
 }
