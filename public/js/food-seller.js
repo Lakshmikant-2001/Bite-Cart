@@ -30,6 +30,7 @@ const foodImage = document.querySelector('#food-img')
 const addFoodBtn = document.querySelector('#add-food-btn')
 const formErrorElement = document.querySelector('#form-error-message')
 const signOutBtn = document.querySelector('#sign-out-btn');
+const fillResNtyTag = document.querySelector("#fill-res-ntfy-btn")
 let foodType;
 
 foodImage.addEventListener('change', () => {
@@ -46,7 +47,7 @@ auth.onAuthStateChanged((user) => {
         removeLoadingAnimation()
         const dbRef = `Food-Seller/${user.uid}`
         const storageRef = `Restaurant/${user.uid}`
-        getResData(dbRef)
+        getResData(dbRef, storageRef)
         getFoodData(dbRef)
         editResBtn.addEventListener('click', () => {
             changeToEditState()
@@ -54,14 +55,11 @@ auth.onAuthStateChanged((user) => {
         addResBtn.addEventListener("click", () => {
             verifyValidation(resInputs, storageRef, dbRef, uploadResImg)
         })
-        addFoodBtn.addEventListener("click", () => {
-            resetFoodDiv()
-            verifyValidation(foodInputs, storageRef, dbRef, uploadFoodImg)
-        })
+        addFoodBtn.addEventListener("click", callResNotifyMsgs)
         signOutBtn.addEventListener('click', () => {
             firebase.auth().signOut().then(() => {
                 window.location = "./index.html"
-            }).catch((eror) => {
+            }).catch((error) => {
                 console.log(error);
             });
         })
@@ -75,7 +73,8 @@ auth.onAuthStateChanged((user) => {
 function verifyValidation(inputs, storageRef, dbRef, func) {
     let result = validateForm(inputs)
     if (result == false) {
-        formErrorElement.style.display = "unset"
+        formErrorElement.style.display = "unset";
+        notifyMsgs(formErrorElement)
     }
     else {
         addLoadingAnimation()
@@ -83,15 +82,14 @@ function verifyValidation(inputs, storageRef, dbRef, func) {
     }
 }
 
-function clearFoodFormInputs(){
+function clearFoodFormInputs() {
     foodInputs.forEach((input) => {
         input.value = "";
     });
-    foodFileName.textContent="";
+    foodFileName.textContent = "";
 }
 
 function validateForm(inputs) {
-    console.log("call")
     let flag = true;
     inputs.forEach(input => {
         let checkValid = input.checkValidity()
@@ -159,12 +157,23 @@ function addResDet(dbRef, url) {
     })
 }
 
-function getResData(dbRef) {
+function getResData(dbRef, storageRef) {
     database.ref(`${dbRef}/Res_det`).on('value', snapshot => {
         const data = snapshot.val()
-        updateResCard(data);
+        if (data == null) {
+            fillResPop()
+        }
+        else {
+            updateResCard(data);
+            addFoodBtn.removeEventListener("click", callResNotifyMsgs)
+            addFoodBtn.addEventListener("click", () => {
+                resetFoodDiv()
+                verifyValidation(foodInputs, storageRef, dbRef, uploadFoodImg)
+            });
+        }
     })
 }
+
 
 function updateResCard(data) {
     resName.value = data.Res_name;
@@ -196,7 +205,6 @@ function uploadFoodImg(storageRef, dbRef) {
 
 //Add Food Details in DB
 function addFoodDet(dbRef, url) {
-    console.log("call")
     if (vegType.checked) {
         foodType = "veg";
     }
@@ -292,4 +300,19 @@ function removeLoadingAnimation() {
     aside.style.display = "none"
     loadingIcon.style.display = "none"
     loadingIcon.style.animation = "unset"
+}
+
+function notifyMsgs(element) {
+    element.style.display = "unset";
+    setTimeout(() => {
+        element.style.display = "none";
+    }, 2000)
+}
+
+function callResNotifyMsgs(){
+    notifyMsgs(fillResNtyTag)
+}
+
+function fillResPop() {
+    changeToEditState()
 }

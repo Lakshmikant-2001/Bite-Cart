@@ -404,12 +404,15 @@ aside img {
     }
 }
 
-#form-error-message{
-    font-size:2rem;
-    color:#F63B35;
-    font-family: 'Passion One', cursive;
-    position:fixed;
-    top:2rem;
-    right:2rem;
+
+.notify-message{
     display:none;
+    font-family: "Passion One";
+    position:fixed;
+    top:0%;
+    right: 0%;
+    margin:2rem;
+    font-size:2.5rem;
+    color:#E45757;
+
 }
